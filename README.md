@@ -1,2 +1,2 @@
 # fliando
-Project for booking flights
+Project for booking flights.
