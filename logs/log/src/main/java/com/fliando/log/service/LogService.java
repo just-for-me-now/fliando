@@ -13,4 +13,9 @@ public class LogService {
 		logs.add(logText);
 	}
 
+	public List<String> findAllLogs() {
+		// TODO Auto-generated method stub
+		return logs;
+	}
+
 }
