@@ -1,0 +1,7 @@
+API:
+
+POST /bookFlight (info in body) -> success depends on a key value on the name of the 1st passenger
+
+Controller
+Service
+(Optional) Repo

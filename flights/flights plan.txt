@@ -1,0 +1,6 @@
+API:
+GET /origins -> devuelve una lista de origenes
+
+GET /origins/{origin}/destinations/ -> devuelve segun el origen, los destinos a los que hay vuelos
+
+GET /origins/{origin}/destinations/{destination}/date/{date} -> Devuelve una lista de vuelos -> se incluyen todos los datos (aerolinea, etc)
