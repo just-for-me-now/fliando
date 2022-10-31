@@ -1,0 +1,3 @@
+-add date in logs
+-add search by date to logs
+-save logs in database
