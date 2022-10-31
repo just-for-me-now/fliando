@@ -1,0 +1,27 @@
+APIs
+
+
+GET /origins -> devuelve una lista de origenes
+
+GET /origins/{origin}/destinations/ -> devuelve segun el origen, los destinos a los que hay vuelos
+
+GET /origins/{origin}/destinations/{destination}/date/{date} -> Devuelve una lista de vuelos -> se incluyen todos los datos (aerolinea, etc)
+
+GET /prices/{{{{info of the flight and passengers}}}}
+
+POST /bookFlight (info in body) -> success depends on a key value on the name of the 1st passenger
+
+
+(Dudas): 
+
+Filtrado de vuelos en el frontend o bien en el backend
+¿Un solo repositorio o varios?
+¿Microservicio "analytical information"??? ¿Una API o un frontend tambien?
+
+
+Services:
+
+-Price service
+-Book
+-Flight availability
+-logs

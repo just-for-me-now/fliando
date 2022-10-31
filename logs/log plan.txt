@@ -1,0 +1,5 @@
+API:
+
+POST / -> body: {data: "data"}
+
+OPCIONAL SI TENEMOS TIEMPO: GET /from/{time}/to/{time} -> [lista de logs]

@@ -1,0 +1,2 @@
+GET /prices
+	body: {contenido del booking}
