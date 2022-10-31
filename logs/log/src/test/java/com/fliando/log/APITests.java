@@ -16,7 +16,7 @@ public class APITests {
 	@BeforeAll
     public static void setup() {
         requestSpec = new RequestSpecBuilder()
-                .setBaseUri("https://localhost:8080")
+                .setBaseUri("http://localhost:8085")
                 .build();
     }
 	
@@ -25,7 +25,7 @@ public class APITests {
 		given(requestSpec)
 		.when()
 			.body("Test log")
-			.post("/")
+			.post("/log")
 		.then()
 			.assertThat()
 			.statusCode(201);
