@@ -1,2 +1,1 @@
-GET /prices
-	body: {contenido del booking}
+GET /price?flightId={id}&toddlers=0&children=0&adults=1&luggage=3
