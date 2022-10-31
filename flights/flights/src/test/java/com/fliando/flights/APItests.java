@@ -16,7 +16,7 @@ public class APItests {
 	@BeforeAll
 	public static void setup() {
 		requestSpec = new RequestSpecBuilder()
-				.setBaseUri("htpp://localhost:8084")
+				.setBaseUri("http://localhost:8084")
 				.build();
 	}
 	
