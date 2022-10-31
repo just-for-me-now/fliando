@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class LogService {
 	
-	static List<String> logs = new ArrayList<>();
-
+	static List<String> logs;
+	
+	static {
+	
+		logs = new ArrayList<>();
+		logs.add("Hello world");
+	}
+	
 	public void saveLog(String logText) {
 		logs.add(logText);
 	}
 
 	public List<String> findAllLogs() {
-		// TODO Auto-generated method stub
 		return logs;
 	}
 

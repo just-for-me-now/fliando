@@ -15,8 +15,11 @@ import com.fliando.log.service.LogService;
 @RestController
 public class Controller {
 	
-	@Autowired
 	private LogService service;
+	
+	public Controller(LogService service) {
+		this.service = service;
+	}
 
 	@PostMapping(path="/logs")
 	public ResponseEntity<Object> saveLog(@RequestBody String logText) {
