@@ -13,7 +13,7 @@ import com.fliando.log.service.LogService;
 
 @RestController
 public class Controller {
-	//Hola
+	
 	private LogService service;
 	
 	public Controller(LogService service) {
