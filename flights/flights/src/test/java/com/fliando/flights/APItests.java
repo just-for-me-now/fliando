@@ -1,6 +1,7 @@
 package com.fliando.flights;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -53,6 +54,42 @@ public class APItests {
 		.then()
 			.assertThat()
 			.statusCode(400);
+	}
+	
+	@Test
+	public void GetDates_WrongOrigin_400() {
+		
+		given(requestSpec)
+		.when()
+			.get("origins/9/destinations/1/dates")
+		.then()
+			.assertThat()
+			.statusCode(400);
+		
+	}
+	
+	@Test
+	public void GetDates_WrongDestination_400() {
+
+		given(requestSpec)
+		.when()
+			.get("origins/1/destinations/10/dates")
+		.then()
+			.assertThat()
+			.statusCode(400);
+		
+	}
+	
+	@Test
+	public void GetDates_CorrectRequest_ReturnsList() {
+
+		given(requestSpec)
+		.when()
+			.get("origins/1/destinations/1/dates")
+		.then()
+			.assertThat()
+			.statusCode(200);
+		
 	}
 	
 }

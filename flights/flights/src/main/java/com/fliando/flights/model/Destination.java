@@ -52,6 +52,14 @@ public class Destination {
 		this.origin = origin;
 	}
 
+	public List<Flight> getFlights() {
+		return flights;
+	}
+
+	public void setFlights(List<Flight> flights) {
+		this.flights = flights;
+	}
+
 	@Override
 	public String toString() {
 		return "Destination [id=" + id + ", name=" + name + "]";

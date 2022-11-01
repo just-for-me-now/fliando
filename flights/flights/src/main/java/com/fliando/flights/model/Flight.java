@@ -90,6 +90,4 @@ public class Flight {
 				+ ", luggageAllowed=" + luggageAllowed + ", date=" + date + "]";
 	}
 	
-	
-
 }
