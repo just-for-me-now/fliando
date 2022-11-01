@@ -14,15 +14,18 @@ public class Flight {
 	
 	private String scales;
 	
+	private boolean roundTrip;
+	
 	@JsonProperty("luggage-allowed")
 	private boolean luggageAllowed;
 	
 	private LocalDateTime date;
 	
-	public Flight(long destination, String airline, String scales, boolean luggageAllowed, LocalDateTime date) {
+	public Flight(long destination, String airline, String scales,boolean roundTrip, boolean luggageAllowed, LocalDateTime date) {
 		this.destination = destination;
 		this.airline = airline;
 		this.scales = scales;
+		this.roundTrip = roundTrip;
 		this.luggageAllowed = luggageAllowed;
 		this.date = date;
 	}
@@ -73,11 +76,20 @@ public class Flight {
 		return id;
 	}
 
+	public boolean isRoundTrip() {
+		return roundTrip;
+	}
+
+	public void setRoundTrip(boolean roundTrip) {
+		this.roundTrip = roundTrip;
+	}
+
 	@Override
 	public String toString() {
 		return "Flight [id=" + id + ", destination=" + destination + ", airline=" + airline + ", scales=" + scales
-				+ ", luggageAllowed=" + luggageAllowed + ", date=" + date + "]";
+				+ ", roundTrip=" + roundTrip + ", luggageAllowed=" + luggageAllowed + ", date=" + date + "]";
 	}
+
 	
 	
 
