@@ -8,6 +8,8 @@ public class PriceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PriceApplication.class, args);
+		
+		//GET /price?flightId={id}&toddlers=0&children=0&adults=1&luggage=3
 	}
 
 }
