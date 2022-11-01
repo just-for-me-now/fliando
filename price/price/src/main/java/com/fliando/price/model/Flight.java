@@ -12,7 +12,7 @@ public class Flight {
 
 	private String airline;
 	
-	private String scales;
+	private boolean scales;
 	
 	private boolean roundTrip;
 	
@@ -21,9 +21,8 @@ public class Flight {
 	
 	private LocalDateTime date;
 	
-	public Flight(long destination, String airline, String scales,boolean roundTrip, boolean luggageAllowed, LocalDateTime date) {
+	public Flight(long destination, boolean scales,boolean roundTrip, boolean luggageAllowed, LocalDateTime date) {
 		this.destination = destination;
-		this.airline = airline;
 		this.scales = scales;
 		this.roundTrip = roundTrip;
 		this.luggageAllowed = luggageAllowed;
@@ -48,11 +47,11 @@ public class Flight {
 		this.airline = airline;
 	}
 
-	public String getScales() {
+	public boolean getScales() {
 		return scales;
 	}
 
-	public void setScales(String scales) {
+	public void setScales(boolean scales) {
 		this.scales = scales;
 	}
 

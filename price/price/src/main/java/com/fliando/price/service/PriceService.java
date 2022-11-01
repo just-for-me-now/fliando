@@ -22,6 +22,8 @@ public class PriceService {
 	public int calculatePrice(long flightId, int toddlers, int children, int adults, int luggage)
 			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException {
 
+		InternalCommunication.post("http://localhost:8085/logs", "Price - Post request received");
+		
 		int totalPrice = 50;
 
 		if (toddlers < 0 || children < 0 || adults < 0) {
