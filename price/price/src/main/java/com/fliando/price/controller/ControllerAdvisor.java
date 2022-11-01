@@ -17,4 +17,8 @@ public class ControllerAdvisor {
 	public ResponseEntity<Object> handleTooManyPeopleReservation(TooManyReservationsException ex, WebRequest re){
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
+	@ExceptionHandler(NotEvenAnAdultException.class)
+	public ResponseEntity<Object> handleNotEvenAnAdult(NotEvenAnAdultException ex, WebRequest re){
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
 }
