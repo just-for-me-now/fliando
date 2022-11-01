@@ -20,6 +20,7 @@ public class FlightService {
 	}
 
 	public List<Origin> findAllOrigins() {
+		
 		InternalCommunications.post(logAddress, "Get request recieved: /origins ");
 
 		return (List<Origin>) repo.findAll();
