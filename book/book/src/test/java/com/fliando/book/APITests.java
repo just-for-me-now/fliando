@@ -36,5 +36,11 @@ public class APITests {
 			.assertThat().statusCode(400);
 	}
 	
+	@Test
+	public void Check_Correct_Price_Value_Return_Correct_Value() {
+		ReservationInfo info = new ReservationInfo(40400,0,0,1,1,100);
+		
+	}
+	
 	
 }
