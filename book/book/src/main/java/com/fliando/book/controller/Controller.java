@@ -18,9 +18,10 @@ public class Controller {
 		this.service = service;
 	}
 	
-	@PostMapping(path="/bookFlight")
+	@PostMapping(path="/book")
 	public ResponseEntity<Object> bookFlight(@RequestBody ReservationInfo reservationInfo) throws UnknownFlightException {
 		service.checkMakeReservation(reservationInfo);
+		
 		
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
