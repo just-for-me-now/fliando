@@ -9,7 +9,12 @@ import static io.restassured.RestAssured.*;
 public class InternalCommunication {
 
 	public static Flight get(String address, long id) {
-        return given().contentType(ContentType.JSON)
-        		.get(address + "/" + id).as(Flight.class);
-    }
+		return given().contentType(ContentType.JSON).get(address + "/" + id).as(Flight.class);
+	}
+
+	public static void post(String address, String body) {
+
+		given().contentType(ContentType.JSON).body(body).post(address);
+
+	}
 }
