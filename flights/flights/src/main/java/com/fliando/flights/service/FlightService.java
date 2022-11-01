@@ -4,15 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.fliando.flights.lib.InternalCommunications;
 import com.fliando.flights.model.Origin;
 import com.fliando.flights.repo.IOriginsRepository;
 
-import io.restassured.http.ContentType;
-
-import static io.restassured.RestAssured.*;
-
 @Service
 public class FlightService {
+	
+	private static String logAddress = "http://localhost:8085/logs";
 	
 	private IOriginsRepository repo;
 	
@@ -21,8 +20,8 @@ public class FlightService {
 	}
 
 	public List<Origin> findAllOrigins() {
-		given().contentType(ContentType.JSON).body("test").
-		post("http://localhost:8084/logs");
+		InternalCommunications.post(logAddress, "Get request recieved: /origins ");
+
 		return (List<Origin>) repo.findAll();
 	}
 
