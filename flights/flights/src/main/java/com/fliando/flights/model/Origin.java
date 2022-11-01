@@ -1,7 +1,15 @@
 package com.fliando.flights.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
+@Entity
 public class Origin {
+	@Id
+	@GeneratedValue
 	private int id;
+	
 	private String name;
 	
 	public Origin(int id, String name) {
