@@ -3,6 +3,8 @@ package com.fliando.flights;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +15,16 @@ import io.restassured.specification.RequestSpecification;
 public class APItests {
 
 	private static RequestSpecification requestSpec;
+	private static String dateAsString;
 	
 	@BeforeAll
 	public static void setup() {
 		requestSpec = new RequestSpecBuilder()
 				.setBaseUri("http://localhost:8084")
 				.build();
+		LocalDateTime date = LocalDateTime.now().plusDays(15);
+		dateAsString = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth(); 
+		
 	}
 	
 	@Test
@@ -56,12 +62,14 @@ public class APItests {
 			.statusCode(400);
 	}
 	
+	
 	@Test
 	public void GetDates_WrongOrigin_400() {
+		System.out.println(dateAsString);
 		
 		given(requestSpec)
 		.when()
-			.get("origins/9/destinations/1/dates")
+			.get("/origins/9/destinations/1/dates/" + dateAsString)
 		.then()
 			.assertThat()
 			.statusCode(400);
@@ -73,7 +81,7 @@ public class APItests {
 
 		given(requestSpec)
 		.when()
-			.get("origins/1/destinations/10/dates")
+			.get("/origins/1/destinations/10/dates/" + dateAsString)
 		.then()
 			.assertThat()
 			.statusCode(400);
@@ -85,7 +93,7 @@ public class APItests {
 
 		given(requestSpec)
 		.when()
-			.get("origins/1/destinations/1/dates")
+			.get("/origins/1/destinations/1/dates/" + dateAsString)
 		.then()
 			.assertThat()
 			.statusCode(200);
