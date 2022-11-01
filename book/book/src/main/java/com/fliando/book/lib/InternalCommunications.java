@@ -10,4 +10,9 @@ public class InternalCommunications {
 		given().contentType(ContentType.JSON).body(body).
 		post(address);
 	}
+	
+	public static int check(String address) {
+		return given().contentType(ContentType.JSON).get(address).then().extract().statusCode();
+		
+	}
 }

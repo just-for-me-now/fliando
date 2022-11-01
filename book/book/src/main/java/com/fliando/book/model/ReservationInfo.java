@@ -22,18 +22,21 @@ public class ReservationInfo {
 	
 	private int luggage;
 	
+	private int price;
+	
 	public ReservationInfo() {
 	}
 	
 	
 
-	public ReservationInfo(long flightId, int toddlers, int children, int adults, int luggage) {
+	public ReservationInfo(long flightId, int toddlers, int children, int adults, int luggage,int price) {
 		super();
 		this.flightId = flightId;
 		this.toddlers = toddlers;
 		this.children = children;
 		this.adults = adults;
 		this.luggage = luggage;
+		this.price = price;
 	}
 
 
@@ -81,12 +84,30 @@ public class ReservationInfo {
 	public long getId() {
 		return id;
 	}
+	
+	public int getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "ReservationInfo [id=" + id + ", flightId=" + flightId + ", toddlers=" + toddlers + ", children="
-				+ children + ", adults=" + adults + ", luggage=" + luggage + "]";
+				+ children + ", adults=" + adults + ", luggage=" + luggage + ", price=" + price + "]";
 	}
+
+	
+
+
+
+	
 
 	
 	
