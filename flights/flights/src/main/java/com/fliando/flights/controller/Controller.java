@@ -31,9 +31,9 @@ public class Controller {
 		return service.findAllDestinations(id);
 	}
 	
-	@GetMapping(path="/origins/{originId}/destinations{destId}/dates")
-	public List<Flight> retreiveDates(@PathVariable long originId, @PathVariable long destinationId) throws OriginUnknownException, DestinationUnknownException {
-		return service.findAllDates(originId, destinationId);
+	@GetMapping(path="/origins/{originId}/destinations{destId}/dates/{date}")
+	public List<Flight> retreiveDates(@PathVariable long originId, @PathVariable long destinationId, @PathVariable LocalDateTime date) throws OriginUnknownException, DestinationUnknownException {
+		return service.findAllDates(originId, destinationId, date);
 	}
 	
 }

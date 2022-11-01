@@ -165,7 +165,7 @@ public class Prepopulator implements CommandLineRunner {
 		}
 	}
 	
-	private boolean luggageAllowed() {
+	private boolean halfAndHalf() {
 		double r = Math.random();
 		if(r < 0.5) {
 			return true;
@@ -180,8 +180,8 @@ public class Prepopulator implements CommandLineRunner {
 			LocalDateTime morningFlight = now.plusDays(i).withHour(7).withMinute(0);
 			LocalDateTime afternoonFlight = now.plusDays(i).withHour(19).withMinute(0);
 
-			flightsRepo.save(new Flight(d, airline(), scales(), luggageAllowed(), morningFlight));
-			flightsRepo.save(new Flight(d, airline(), scales(), luggageAllowed(), afternoonFlight));
+			flightsRepo.save(new Flight(d, airline(), scales(), halfAndHalf(), halfAndHalf(), morningFlight));
+			flightsRepo.save(new Flight(d, airline(), scales(), halfAndHalf(), halfAndHalf(), afternoonFlight));
 		}
 		
 	}
