@@ -1,5 +1,9 @@
 package com.fliando.flights;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.fliando.flights.model.Destination;
+import com.fliando.flights.model.Flight;
 import com.fliando.flights.model.Origin;
 import com.fliando.flights.repo.IDestinationsRepository;
+import com.fliando.flights.repo.IFlightsRepository;
 import com.fliando.flights.repo.IOriginsRepository;
 
 @Component
@@ -18,6 +24,8 @@ public class Prepopulator implements CommandLineRunner {
 	private IOriginsRepository repo;
 	@Autowired
 	private IDestinationsRepository destinationsRepo;
+	@Autowired
+	private IFlightsRepository flightsRepo;
 	
 
 	@Override
@@ -107,6 +115,75 @@ public class Prepopulator implements CommandLineRunner {
 		destinationsRepo.save(destination18);
 		destinationsRepo.save(destination19);
 		destinationsRepo.save(destination20);
+
+		getFlights(destination1);
+		getFlights(destination2);
+		getFlights(destination3);
+		getFlights(destination4);
+		getFlights(destination5);
+		getFlights(destination6);
+		getFlights(destination7);
+		getFlights(destination8);
+		getFlights(destination9);
+		getFlights(destination10);
+		getFlights(destination11);
+		getFlights(destination12);
+		getFlights(destination13);
+		getFlights(destination14);
+		getFlights(destination15);
+		getFlights(destination16);
+		getFlights(destination17);
+		getFlights(destination18);
+		getFlights(destination19);
+		getFlights(destination20);
+		
+		
+	}
+	
+	private String airline() {
+		int r =(int)  Math.ceil(Math.random() * 5);
+		switch(r) {
+		case 1:
+			return "Vueling";
+		case 2:
+			return "Tam";
+		case 3:
+			return "RyanAir";
+		case 4:
+			return "Lufthansa";
+		default:
+			return "Emirates";
+		}
+	}
+	
+	private String scales() {
+		double r = Math.random();
+		if(r < 0.5) {
+			return "Yes";
+		} else {
+			return "No";
+		}
+	}
+	
+	private boolean luggageAllowed() {
+		double r = Math.random();
+		if(r < 0.5) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public void getFlights(Destination d) {
+		LocalDateTime now = LocalDateTime.now();
+		for(int i = 1; i <= 30; i++) {
+			LocalDateTime morningFlight = now.plusDays(i).withHour(7).withMinute(0);
+			LocalDateTime afternoonFlight = now.plusDays(i).withHour(19).withMinute(0);
+
+			flightsRepo.save(new Flight(d, airline(), scales(), luggageAllowed(), morningFlight));
+			flightsRepo.save(new Flight(d, airline(), scales(), luggageAllowed(), afternoonFlight));
+		}
+		
 	}
 
 }
