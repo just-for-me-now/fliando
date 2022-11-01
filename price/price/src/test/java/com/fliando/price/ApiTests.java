@@ -44,8 +44,19 @@ public class ApiTests {
 		.then()
 			.assertThat()
 			.statusCode(400)
-			.contentType(ContentType.JSON)
+			.contentType(ContentType.JSON);
 		
+	}
+	
+	@Test
+	public void Get_RetreiveWrongFlight_ReturnBadRequest() {
+		given(requestSpec)
+		.when()
+			.get("/price?flightId=81312313534534531&toddlers=0&children=0&adults=1luggage=0")
+		.then()
+			.assertThat()
+			.statusCode(400)
+			.contentType(ContentType.JSON);
 	}
 	
 	
