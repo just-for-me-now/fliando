@@ -101,4 +101,28 @@ public class APItests {
 		
 	}
 	
+	@Test
+	public void GetFlight_CorrectRequest_ReturnsFlight() {
+
+		given(requestSpec)
+		.when()
+			.get("/flights/1")
+		.then()
+			.assertThat()
+			.statusCode(200);
+		
+	}
+	
+	@Test
+	public void GetFlight_NoFlight_404() {
+
+		given(requestSpec)
+		.when()
+			.get("/flights/10000")
+		.then()
+			.assertThat()
+			.statusCode(404);
+		
+	}
+	
 }

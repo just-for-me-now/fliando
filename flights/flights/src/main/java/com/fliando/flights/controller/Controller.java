@@ -40,4 +40,9 @@ public class Controller {
 		return service.findDates(originId, destinationId, date.atStartOfDay());
 	}
 	
+	@GetMapping(path="/flights/{id}")
+	public Flight retrieveFlight(@PathVariable long id) throws FlightNotFoundException {
+		return service.findFlight(id);
+	}
+	
 }
