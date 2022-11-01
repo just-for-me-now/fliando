@@ -4,23 +4,24 @@ import java.util.*;
 
 import org.springframework.stereotype.Service;
 
+import com.fliando.log.model.Log;
+import com.fliando.log.repo.ILogsRepository;
+
 @Service
 public class LogService {
 	
-	static List<String> logs;
+	private static ILogsRepository repo;
 	
-	static {
-	
-		logs = new ArrayList<>();
-		logs.add("Hello world");
+	public LogService(ILogsRepository repo) {
+		this.repo = repo;
 	}
 	
-	public void saveLog(String logText) {
-		logs.add(logText);
+	public void saveLog(String message) {
+		repo.save(new Log(message));
 	}
 
-	public List<String> findAllLogs() {
-		return logs;
+	public List<Log> findAllLogs() {
+		return (List<Log>) repo.findAll();
 	}
 
 }

@@ -8,19 +8,16 @@ import jakarta.persistence.Id;
 public class Origin {
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	
 	private String name;
 	
-	public Origin(int id, String name) {
+	public Origin(String name) {
 		super();
-		this.id = id;
 		this.name = name;
 	}
 	
-	public Origin() {
-		
-	}
+	public Origin() {}
 
 	public String getName() {
 		return name;
@@ -30,7 +27,7 @@ public class Origin {
 		this.name = name;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
