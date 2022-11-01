@@ -49,9 +49,12 @@ public class PriceService {
 		}
 		// TODO: add boolean roundTrip
 		
+		totalPrice=(int)(totalPrice*checkAirLine(flight));
 		
 		//This always last
-		totalPrice=(int)(totalPrice*checkAirLine(flight));
+		if (flight.isRoundTrip()) {
+			totalPrice=(int)(totalPrice*1.7);
+		}
 		
 		return totalPrice;
 	}
