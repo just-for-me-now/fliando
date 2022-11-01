@@ -28,13 +28,17 @@ public class Flight {
 	@Column(name="luggage-allowed")
 	private boolean luggageAllowed;
 	
+	@Column(name="round-trip")
+	private boolean roundTrip;
+	
 	private LocalDateTime date;
 	
-	public Flight(Destination destination, String airline, String scales, boolean luggageAllowed, LocalDateTime date) {
+	public Flight(Destination destination, String airline, String scales, boolean luggageAllowed, boolean roundTrip, LocalDateTime date) {
 		this.destination = destination;
 		this.airline = airline;
 		this.scales = scales;
 		this.luggageAllowed = luggageAllowed;
+		this.roundTrip = roundTrip;
 		this.date = date;
 	}
 
@@ -82,6 +86,14 @@ public class Flight {
 
 	public long getId() {
 		return id;
+	}
+
+	public boolean isRoundTrip() {
+		return roundTrip;
+	}
+
+	public void setRoundTrip(boolean roundTrip) {
+		this.roundTrip = roundTrip;
 	}
 
 	@Override

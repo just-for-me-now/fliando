@@ -43,7 +43,8 @@ public class FlightService {
 		return origin.get().getDestinations();
 	}
 
-	public List<Flight> findAllDates(long originId, long destinationId) throws OriginUnknownException, DestinationUnknownException {
+	public List<Flight> findAllDates(long originId, long destinationId, LocalDateTime date) throws OriginUnknownException, DestinationUnknownException {
+		
 		Optional<Origin> origin = originRepo.findById(originId);
 		if(origin.isEmpty()) throw new OriginUnknownException();
 		
@@ -54,9 +55,7 @@ public class FlightService {
 			throw new OriginUnknownException();
 		}
 		
-		
-		// TODO half-done
-		return null;
+		return destination.get().getFlights();
 	}
 
 }
