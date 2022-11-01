@@ -24,7 +24,7 @@ public class APITests {
 	@Test
 	public void Push_WrongDestination_CannotAccessDestination() {
 		//flight id; toddlers; children; adults; luggage;
-		ReservationInfo info = new ReservationInfo(404,0,0,1,1);
+		ReservationInfo info = new ReservationInfo(40400,0,0,1,1,100);
 		given(requestSpec)
 		.when()
 			.body(info)
