@@ -49,10 +49,6 @@ public class Origin {
 	@Override
 	public String toString() {
 		return "Origin [id=" + id + ", name=" + name + "]";
-	};
-	
-	
-	
-	
+	}
 	
 }

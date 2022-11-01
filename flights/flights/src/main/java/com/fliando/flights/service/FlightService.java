@@ -3,6 +3,7 @@ package com.fliando.flights.service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,11 +24,11 @@ import com.fliando.flights.repo.IOriginsRepository;
 public class FlightService {
 	
 	private IOriginsRepository originRepo;
-	private IDestinationsRepository destRepo;
 	private IFlightsRepository flightsRepo;
 	
-	public FlightService(IOriginsRepository repo) {
-		this.originRepo = repo;
+	public FlightService(IOriginsRepository originRepo, IFlightsRepository flightsRepo) {
+		this.originRepo = originRepo;
+		this.flightsRepo = flightsRepo;
 	}
 
 	public List<Origin> findAllOrigins() {
@@ -48,8 +49,7 @@ public class FlightService {
 
 	public List<Flight> findDates(long originId, long destinationId, LocalDateTime date) throws OriginUnknownException, DestinationUnknownException {
 		
-		return (List<Flight>) flightsRepo.findAll();
-		/*
+		
 		Optional<Origin> origin = originRepo.findById(originId);
 		if(origin.isEmpty()) throw new OriginUnknownException();
 		
@@ -63,15 +63,15 @@ public class FlightService {
 		if(destination == null) throw new DestinationUnknownException();
 		
 		if(date == null) {
-			date = LocalDateTime.now();
+			date = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
 		}
-		LocalDateTime first = date.minusDays(3).withHour(0).withMinute(0).withSecond(0).withNano(0);
-		if(first.compareTo(LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0)) <= 0) {
-			first = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0).plusDays(1);
+		LocalDateTime first = date.minusDays(3);
+		if(first.compareTo(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS)) <= 0) {
+			first = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).plusDays(1);
 		}
 		LocalDateTime last = first.plusDays(7);
 		
-		return List.of(new Flight());//flightsRepo.findByDestinationIdAndDateBetween(destination.get().getId(), first, last); */
+		return flightsRepo.findByDestinationIdAndTimeBetween(destination.getId(), first, last);
 	}
 
 }

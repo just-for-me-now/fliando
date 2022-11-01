@@ -1,5 +1,8 @@
 package com.fliando.flights.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,9 +11,6 @@ import com.fliando.flights.model.Destination;
 import com.fliando.flights.model.Flight;
 import com.fliando.flights.model.Origin;
 import com.fliando.flights.service.FlightService;
-
-import java.time.LocalDateTime;
-import java.util.*;
 
 @RestController
 public class Controller {
@@ -31,9 +31,13 @@ public class Controller {
 		return service.findAllDestinations(id);
 	}
 	
-	@GetMapping(path="/origins/{originId}/destinations{destId}/dates/{date}")
-	public List<Flight> retreiveDates(@PathVariable long originId, @PathVariable long destId, @PathVariable LocalDateTime date) throws OriginUnknownException, DestinationUnknownException {
-		return service.findDates(originId, destId, date);
+	@GetMapping(path="/origins/{originId}/destinations/{destinationId}/dates/{date}")
+	public List<Flight> retreiveDates(
+			@PathVariable long originId, 
+			@PathVariable long destinationId, 
+			@PathVariable LocalDate date) 
+					throws OriginUnknownException, DestinationUnknownException {
+		return service.findDates(originId, destinationId, date.atStartOfDay());
 	}
 	
 }

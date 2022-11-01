@@ -2,12 +2,13 @@ package com.fliando.flights.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -18,7 +19,7 @@ public class Flight {
 	private long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn
+	@JsonIgnore
 	private Destination destination;
 
 	private String airline;
@@ -31,15 +32,15 @@ public class Flight {
 	@Column(name="round-trip")
 	private boolean roundTrip;
 	
-	private LocalDateTime date;
+	private LocalDateTime time;
 	
-	public Flight(Destination destination, String airline, String scales, boolean luggageAllowed, boolean roundTrip, LocalDateTime date) {
-		this.destination = destination;
+	public Flight(String airline, String scales, boolean luggageAllowed, boolean roundTrip, LocalDateTime time) {
+		super();
 		this.airline = airline;
 		this.scales = scales;
 		this.luggageAllowed = luggageAllowed;
 		this.roundTrip = roundTrip;
-		this.date = date;
+		this.time = time;
 	}
 
 	public Flight() {}
@@ -76,18 +77,6 @@ public class Flight {
 		this.luggageAllowed = luggageAllowed;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
-	}
-
-	public long getId() {
-		return id;
-	}
-
 	public boolean isRoundTrip() {
 		return roundTrip;
 	}
@@ -96,10 +85,22 @@ public class Flight {
 		this.roundTrip = roundTrip;
 	}
 
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
+
+	public long getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return "Flight [id=" + id + ", destination=" + destination + ", airline=" + airline + ", scales=" + scales
-				+ ", luggageAllowed=" + luggageAllowed + ", date=" + date + "]";
+				+ ", luggageAllowed=" + luggageAllowed + ", roundTrip=" + roundTrip + ", time=" + time + "]";
 	}
 	
 }
