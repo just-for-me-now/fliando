@@ -1,30 +1,30 @@
 package com.fliando.flights.model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Origin {
+public class Destination {
+	
 	@Id
 	@GeneratedValue
 	private long id;
 	
 	private String name;
 	
-	@OneToMany(mappedBy="origin", fetch=FetchType.LAZY)
-	private List<Destination> destinations;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn
+	private Origin origin;
 	
-	public Origin(String name) {
-		super();
+	public Destination(String name) {
 		this.name = name;
 	}
-	
-	public Origin() {}
+
+	public Destination() {}
 
 	public String getName() {
 		return name;
@@ -38,21 +38,17 @@ public class Origin {
 		return id;
 	}
 
-	public List<Destination> getDestinations() {
-		return destinations;
+	public Origin getOrigin() {
+		return origin;
 	}
 
-	public void setDestinations(List<Destination> destinations) {
-		this.destinations = destinations;
+	public void setOrigin(Origin origin) {
+		this.origin = origin;
 	}
 
 	@Override
 	public String toString() {
-		return "Origin [id=" + id + ", name=" + name + "]";
-	};
-	
-	
-	
-	
+		return "Destination [id=" + id + ", name=" + name + "]";
+	}
 	
 }

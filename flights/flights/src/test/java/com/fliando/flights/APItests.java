@@ -45,7 +45,7 @@ public class APItests {
 	}
 	
 	@Test
-	public void Get_WrongOrigin_404() {
+	public void Get_WrongOrigin_400() {
 		
 		given(requestSpec)
 		.when()
