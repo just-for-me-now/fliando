@@ -33,7 +33,7 @@ public class APItests {
 	}
 	
 	@Test
-	public void Get_RetrieveAllDestinations_Succesful() {
+	public void Get_RightOrigin_Succesful() {
 		
 		given(requestSpec)
 		.when()
@@ -42,6 +42,17 @@ public class APItests {
 			.assertThat()
 			.statusCode(200)
 			.contentType(ContentType.JSON);
+	}
+	
+	@Test
+	public void Get_WrongOrigin_404() {
+		
+		given(requestSpec)
+		.when()
+			.get("/origins/9/destinations")
+		.then()
+			.assertThat()
+			.statusCode(400);
 	}
 	
 }
