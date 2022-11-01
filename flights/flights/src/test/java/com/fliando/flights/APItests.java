@@ -1,13 +1,13 @@
 package com.fliando.flights;
 
+import static io.restassured.RestAssured.given;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
-import static io.restassured.RestAssured.*;
 
 public class APItests {
 
@@ -30,6 +30,18 @@ public class APItests {
 			.statusCode(200)
 			.contentType(ContentType.JSON);
 		
+	}
+	
+	@Test
+	public void Get_RetrieveAllDestinations_Succesful() {
+		
+		given(requestSpec)
+		.when()
+			.get("/origins/1/destinations")
+		.then()
+			.assertThat()
+			.statusCode(200)
+			.contentType(ContentType.JSON);
 	}
 	
 }
