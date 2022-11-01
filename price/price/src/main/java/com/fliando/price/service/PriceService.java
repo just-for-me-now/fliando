@@ -72,9 +72,10 @@ public class PriceService {
 			return 1.4;
 		case "Lufthansa":
 			return 1.6;
-		default:
-			//"Emirates"
+		case "Emirates":
 			return 2;
+		default:
+			return 1;
 			
 		}
 		
