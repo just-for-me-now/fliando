@@ -24,7 +24,7 @@ public class Flight {
 
 	private String airline;
 	
-	private String scales;
+	private boolean scales;
 	
 	@Column(name="luggage-allowed")
 	private boolean luggageAllowed;
@@ -33,14 +33,18 @@ public class Flight {
 	private boolean roundTrip;
 	
 	private LocalDateTime time;
-	
-	public Flight(String airline, String scales, boolean luggageAllowed, boolean roundTrip, LocalDateTime time) {
-		super();
+
+	public Flight(String airline, boolean scales, boolean luggageAllowed, boolean roundTrip,
+			LocalDateTime time) {
 		this.airline = airline;
 		this.scales = scales;
 		this.luggageAllowed = luggageAllowed;
 		this.roundTrip = roundTrip;
 		this.time = time;
+	}
+
+	public Flight(long id) {
+		this.id = id;
 	}
 
 	public Flight() {}
@@ -61,11 +65,11 @@ public class Flight {
 		this.airline = airline;
 	}
 
-	public String getScales() {
+	public boolean isScales() {
 		return scales;
 	}
 
-	public void setScales(String scales) {
+	public void setScales(boolean scales) {
 		this.scales = scales;
 	}
 
@@ -96,11 +100,17 @@ public class Flight {
 	public long getId() {
 		return id;
 	}
-
-	@Override
-	public String toString() {
-		return "Flight [id=" + id + ", destination=" + destination + ", airline=" + airline + ", scales=" + scales
-				+ ", luggageAllowed=" + luggageAllowed + ", roundTrip=" + roundTrip + ", time=" + time + "]";
-	}
 	
+	public FlightAsReturned asReturned() {
+		FlightAsReturned ans = new FlightAsReturned(id);
+		ans.setAirline(airline);
+		ans.setScales(scales);
+		ans.setRoundTrip(roundTrip);
+		ans.setLuggageAllowed(luggageAllowed);
+		ans.setTime(time);
+		ans.setDestinationName(this.getDestination().getName());
+		ans.setOriginName(this.getDestination().getOrigin().getName());
+		
+		return ans;
+	}
 }

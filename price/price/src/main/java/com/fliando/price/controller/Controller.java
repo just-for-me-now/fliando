@@ -18,7 +18,7 @@ public class Controller {
 	//@ResponseBody
 	@GetMapping("/price")
 	public int method(@RequestParam long flightId, @RequestParam int toddlers,@RequestParam int children,@RequestParam int adults,@RequestParam int luggage) throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException, IllegalLuggageException {
-		return service.calculatePrice(flightId,toddlers,children, adults, luggage);
+		return service.calculatePrice(flightId, toddlers, children, adults, luggage);
 	}
 	
 }
