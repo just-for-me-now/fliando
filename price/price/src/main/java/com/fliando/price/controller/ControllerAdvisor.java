@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 @ControllerAdvice
 public class ControllerAdvisor {
 
@@ -24,6 +27,18 @@ public class ControllerAdvisor {
 	}
 	@ExceptionHandler(IllegalLuggageException.class)
 	public ResponseEntity<Object> handleIllegalLuggage(IllegalLuggageException ex, WebRequest re){
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(JsonMappingException.class)
+	public ResponseEntity<Object> handleJsonException1(JsonMappingException ex, WebRequest re){
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(JsonProcessingException.class)
+	public ResponseEntity<Object> handleJsonException2(JsonProcessingException ex, WebRequest re){
+		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	@ExceptionHandler(FlightUnavailableException.class)
+	public ResponseEntity<Object> handleFlightError(FlightUnavailableException ex, WebRequest re) {
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	}
 }

@@ -1,45 +1,36 @@
 package com.fliando.book.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class ReservationInfo {
 
 	@Id
-	@GeneratedValue
-	private long id;
 	@Column(name="flight-id")
 	private long flightId;
-	
-	private int toddlers;
-	
-	private int children;
-	
-	private int adults;
+
+	@OneToMany(fetch=FetchType.LAZY)
+	private List<Passenger> passengers;
 	
 	private int luggage;
 	
 	private int price;
-	
-	public ReservationInfo() {
-	}
-	
-	
 
-	public ReservationInfo(long flightId, int toddlers, int children, int adults, int luggage,int price) {
-		super();
+	public ReservationInfo(long flightId, List<Passenger> passengers, int luggage, int price) {
 		this.flightId = flightId;
-		this.toddlers = toddlers;
-		this.children = children;
-		this.adults = adults;
+		this.passengers = passengers;
 		this.luggage = luggage;
 		this.price = price;
 	}
 
-
+	public ReservationInfo() {}
 
 	public long getFlightId() {
 		return flightId;
@@ -49,28 +40,12 @@ public class ReservationInfo {
 		this.flightId = flightId;
 	}
 
-	public int getToddlers() {
-		return toddlers;
+	public List<Passenger> getPassengers() {
+		return passengers;
 	}
 
-	public void setToddlers(int toddlers) {
-		this.toddlers = toddlers;
-	}
-
-	public int getChildren() {
-		return children;
-	}
-
-	public void setChildren(int children) {
-		this.children = children;
-	}
-
-	public int getAdults() {
-		return adults;
-	}
-
-	public void setAdults(int adults) {
-		this.adults = adults;
+	public void setPassengers(List<Passenger> passengers) {
+		this.passengers = passengers;
 	}
 
 	public int getLuggage() {
@@ -81,34 +56,11 @@ public class ReservationInfo {
 		this.luggage = luggage;
 	}
 
-	public long getId() {
-		return id;
-	}
-	
 	public int getPrice() {
 		return price;
 	}
 
-
-
 	public void setPrice(int price) {
 		this.price = price;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "ReservationInfo [id=" + id + ", flightId=" + flightId + ", toddlers=" + toddlers + ", children="
-				+ children + ", adults=" + adults + ", luggage=" + luggage + ", price=" + price + "]";
-	}
-
-	
-
-
-
-	
-
-	
-	
 }

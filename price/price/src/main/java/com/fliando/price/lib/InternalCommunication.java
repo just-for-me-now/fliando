@@ -2,7 +2,21 @@ package com.fliando.price.lib;
 
 import static io.restassured.RestAssured.given;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.net.http.HttpResponse.BodyHandlers;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fliando.price.controller.FlightUnavailableException;
 import com.fliando.price.model.Flight;
+import com.fliando.price.model.PreFlight;
 
 import io.restassured.http.ContentType;
 
@@ -20,13 +34,23 @@ public class InternalCommunication {
 		}
 	}
 
-	public static Flight get(String address, long id) {
-		return given().contentType(ContentType.JSON).get(address + "/" + id).then().extract().as(Flight.class);
-	}
-
-	public static void post(String address, String body) {
-
-		given().contentType(ContentType.JSON).body(body).post(address);
-
+	public static Flight getFlight(String address) throws Exception {
+		
+		HttpClient client = HttpClient.newHttpClient();
+		
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
+		
+		HttpResponse<String> htr = client.sendAsync(request, BodyHandlers.ofString()).join();
+		
+		String body = htr.body();
+		
+		ObjectMapper mapper = new ObjectMapper();
+		
+		PreFlight flight = new PreFlight();
+		
+		flight = mapper.readValue(body, PreFlight.class);
+		
+		return flight.toFlight();
+		
 	}
 }

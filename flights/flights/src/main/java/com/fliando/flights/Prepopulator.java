@@ -138,9 +138,11 @@ public class Prepopulator implements CommandLineRunner {
 		getFlights(destination19);
 		getFlights(destination20);
 		
+		getTestFlight(destination1);
+		
 		
 	}
-	
+
 	private String airline() {
 		int r =(int)  Math.ceil(Math.random() * 5);
 		switch(r) {
@@ -194,6 +196,13 @@ public class Prepopulator implements CommandLineRunner {
 			flightsRepo.save(afternoonFlight);
 		}
 		
+	}
+	
+	private void getTestFlight(Destination destination1) {
+		Flight flight = new Flight("testAirlines", false, false, false, LocalDateTime.now().minusYears(10));
+		flight.setDestination(destination1);
+		
+		flightsRepo.save(flight);
 	}
 
 }
