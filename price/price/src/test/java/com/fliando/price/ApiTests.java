@@ -1,16 +1,14 @@
 package com.fliando.price;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
-import static io.restassured.RestAssured.*;
 
 public class ApiTests {
 	
@@ -31,8 +29,8 @@ public class ApiTests {
 			.get("/price?flightId=1&toddlers=1&children=0&adults=1&luggage=0")
 		.then()
 			.assertThat()
-			.statusCode(200)
 			.contentType(ContentType.JSON)
+			.statusCode(200)
 			.body("$.price", equalTo("50"));
 	}
 	

@@ -27,6 +27,7 @@ public class PriceService {
 		
 		Flight flight = InternalCommunication.get("http://localhost:8084/flights", flightId);
 
+		
 		if (!flight.isLuggageAllowed() && luggage>0 || luggage<0) {
 			throw new IllegalLuggageException();
 		}
@@ -43,6 +44,7 @@ public class PriceService {
 		}
 		
 		return totalPrice;
+		
 	}
 
 	private int getPriceFromPeople(int toddlers, int children, int adults)
