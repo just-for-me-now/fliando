@@ -20,20 +20,20 @@ public class Flight {
 	@JsonProperty("round-trip")
 	private boolean roundTrip;
 
-	private LocalDateTime date;
+	private LocalDateTime time;
 	
 	private String origin;
 	
-	private long destination;
+	private String destination;
 
 	public Flight(long id, String airline, boolean scales, boolean luggageAllowed, boolean roundTrip,
-			LocalDateTime date, String origin, long destination) {
+			LocalDateTime time, String origin, String destination) {
 		this.id = id;
 		this.airline = airline;
 		this.scales = scales;
 		this.luggageAllowed = luggageAllowed;
 		this.roundTrip = roundTrip;
-		this.date = date;
+		this.time = time;
 		this.origin = origin;
 		this.destination = destination;
 	}
@@ -80,12 +80,12 @@ public class Flight {
 		this.roundTrip = roundTrip;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
+	public LocalDateTime getTime() {
+		return time;
 	}
 
-	public void setDate(LocalDateTime date) {
-		this.date = date;
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 	public String getOrigin() {
@@ -96,18 +96,18 @@ public class Flight {
 		this.origin = origin;
 	}
 
-	public long getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 
-	public void setDestination(long destination) {
+	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 
 	@Override
 	public String toString() {
 		return "Flight [id=" + id + ", airline=" + airline + ", scales=" + scales + ", luggageAllowed=" + luggageAllowed
-				+ ", roundTrip=" + roundTrip + ", date=" + date + ", origin=" + origin + ", destination=" + destination
+				+ ", roundTrip=" + roundTrip + ", time=" + time + ", origin=" + origin + ", destination=" + destination
 				+ "]";
 	}
 	
