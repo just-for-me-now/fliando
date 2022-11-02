@@ -1,24 +1,28 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 import './App.css';
+import Header from './components/Header/Header.js';
+import SelectFlight from './components/SelectFlight/SelectFlight.js';
 
 function App() {
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+     <div className="App">
+      <Header />
+      <SelectFlight />
     </div>
+    
+    </>
+   
   );
 }
 

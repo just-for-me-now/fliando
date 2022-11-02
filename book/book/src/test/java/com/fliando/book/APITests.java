@@ -1,5 +1,9 @@
 package com.fliando.book;
 
+import static io.restassured.RestAssured.given;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +14,6 @@ import com.fliando.book.model.age;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import static io.restassured.specification.RequestSpecification.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ArrayList;
-
-import static io.restassured.RestAssured.*;
 
 public class APITests {
 
