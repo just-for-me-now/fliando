@@ -3,6 +3,7 @@ package com.fliando.flights.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.fliando.flights.model.Origin;
 import com.fliando.flights.service.FlightService;
 
 @RestController
+@CrossOrigin
 public class Controller {
 	
 	private FlightService service;

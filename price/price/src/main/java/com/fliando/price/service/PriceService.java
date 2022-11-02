@@ -6,10 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fliando.price.controller.FlightUnavailableException;
 import com.fliando.price.controller.IllegalLuggageException;
+import com.fliando.price.controller.IllegalRoundTripException;
 import com.fliando.price.controller.InvalidNumberOfPeopleException;
 import com.fliando.price.controller.NotEvenAnAdultException;
 import com.fliando.price.controller.TooManyReservationsException;
-import com.fliando.price.lib.InternalCommunication;
+import com.fliando.price.lib.InternalCommunications;
 import com.fliando.price.model.Flight;
 
 @Service
@@ -21,15 +22,14 @@ public class PriceService {
 
 	private int baseLuggage = 15;
 
-	public int calculatePrice(long flightId, int toddlers, int children, int adults, int luggage)
+	public int calculatePrice(long flightId, int toddlers, int children, int adults, int luggage, boolean roundTrip)
 			throws Exception {
 
-		InternalCommunication.log("Price - Post request received");
+		InternalCommunications.log("Price - Post request received");
 		
 		int totalPrice = getPriceFromPeople(toddlers, children, adults);
 		
-		Flight flight = InternalCommunication.getFlight("http://localhost:8084/flights/" + flightId);
-
+		Flight flight = InternalCommunications.getFlight(flightId);
 		
 		if (!flight.isLuggageAllowed() && luggage>0 || luggage<0) {
 			throw new IllegalLuggageException();
@@ -42,8 +42,10 @@ public class PriceService {
 		totalPrice=(int)(checkAirLine(flight)*totalPrice);
 		
 		//This always last
-		if (flight.isRoundTrip()) {
+		if (flight.isRoundTrip() && roundTrip) {
 			totalPrice=(int)(1.7*totalPrice);
+		} else if (roundTrip) {
+			throw new IllegalRoundTripException();
 		}
 		
 		return totalPrice;

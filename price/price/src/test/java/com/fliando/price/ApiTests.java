@@ -21,12 +21,13 @@ public class ApiTests {
 				.build();
 	}
 
+	//Integration
 	@Test
 	public void Get_RetreiveAllParams_ShowCorrectPrice() {
 		//GET /price?flightId={id}&toddlers=0&children=0&adults=1&luggage=3
 		given(requestSpec)		
 		.when()
-			.get("/price?flightId=1&toddlers=1&children=0&adults=1&luggage=0")
+			.get("/price?flightId=1&toddlers=1&children=0&adults=1&luggage=0&roundTrip=false")
 		.then()
 			.assertThat()
 			.contentType(ContentType.JSON)
@@ -37,7 +38,7 @@ public class ApiTests {
 	public void Get_RetreiveAllParams_ReturnsBadRequest() {
 		given(requestSpec)		
 		.when()
-			.get("/price?flightId=0&toddlers=0&children=0&adults=0&luggage=0")
+			.get("/price?flightId=0&toddlers=0&children=0&adults=0&luggage=0&roundTrip=false")
 		.then()
 			.assertThat()
 			.statusCode(400);
@@ -48,7 +49,7 @@ public class ApiTests {
 	public void Get_RetreiveWrongFlight_ReturnBadRequest() {
 		given(requestSpec)
 		.when()
-			.get("/price?flightId=81312313534534531&toddlers=0&children=0&adults=1&luggage=0")
+			.get("/price?flightId=81312313534534531&toddlers=0&children=0&adults=1&luggage=0&roundTrip=false")
 		.then()
 			.assertThat()
 			.statusCode(400);

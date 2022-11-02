@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.fliando.flights.lib.InternalCommunications;
 import com.fliando.flights.model.Destination;
 import com.fliando.flights.model.Flight;
 import com.fliando.flights.model.Origin;
@@ -16,16 +17,19 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(OriginUnknownException.class)
     public ResponseEntity<Origin> handleOriginNotFound(OriginUnknownException exc, WebRequest req) {
+		InternalCommunications.log("Flight - Flight information request aborted: unknown origin");
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
     @ExceptionHandler(DestinationUnknownException.class)
     public ResponseEntity<Destination> handleDestinationNotFound(DestinationUnknownException exc, WebRequest req) {
+		InternalCommunications.log("Flight - Flight information request aborted: unknown destination");
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
     
     @ExceptionHandler(FlightNotFoundException.class)
     public ResponseEntity<Flight> handleFlightNotFound(FlightNotFoundException exc, WebRequest req) {
+		InternalCommunications.log("Flight - Flight information request aborted: unknown flight");
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     

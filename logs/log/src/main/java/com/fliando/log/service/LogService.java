@@ -17,10 +17,14 @@ public class LogService {
 	}
 	
 	public void saveLog(String message) {
+		
 		repo.save(new Log(message));
 	}
 
 	public List<Log> findAllLogs() {
+		
+		repo.save(new Log("Log - Logs were requested"));
+		
 		return (List<Log>) repo.findAll();
 	}
 

@@ -26,7 +26,7 @@ public class APITests {
 		given(requestSpec)
 		.when()
 			.body("Test log")
-			.post("/log")
+			.post("/logs")
 		.then()
 			.assertThat()
 			.statusCode(201);
@@ -36,7 +36,7 @@ public class APITests {
 	public void Get_RetreiveAllData_Succesful() {
 		given(requestSpec)
 		.when()
-			.get("/log")
+			.get("/logs")
 		.then()
 			.assertThat()
 			.statusCode(200)

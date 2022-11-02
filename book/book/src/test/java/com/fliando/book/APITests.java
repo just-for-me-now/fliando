@@ -29,7 +29,7 @@ public class APITests {
 	@Test
 	public void Push_WrongDestination_CannotAccessDestination() {
 		
-		ReservationInfo info = new ReservationInfo(9999L, List.of(new Passenger("12345678Z", "", "", "", age.ADULT)),0,100);
+		ReservationInfo info = new ReservationInfo(9999L, List.of(new Passenger("12345678Z", "", "", "", age.ADULT)),0, false,100);
 		given(requestSpec)
 		.contentType(ContentType.JSON)
 		.body(info)
@@ -42,7 +42,7 @@ public class APITests {
 	@Test
 	public void Push_WrongPassengers_CannotAccessDestination() {
 		
-		ReservationInfo info = new ReservationInfo(1201L, List.of(),0,100);
+		ReservationInfo info = new ReservationInfo(1201L, List.of(),0, false,100);
 		given(requestSpec)
 		.contentType(ContentType.JSON)
 		.body(info)
@@ -55,7 +55,7 @@ public class APITests {
 	@Test
 	public void Push_NullPassengers_CannotAccessDestination() {
 		
-		ReservationInfo info = new ReservationInfo(1201L, null,0,100);
+		ReservationInfo info = new ReservationInfo(1201L, null,0, false,100);
 		given(requestSpec)
 		.contentType(ContentType.JSON)
 		.body(info)
@@ -67,7 +67,7 @@ public class APITests {
 	
 	@Test
 	public void Check_Correct_Price_Value_Return_Correct_Value() {
-		ReservationInfo info = new ReservationInfo(1201L, List.of(new Passenger("" + Math.random(), "John", "Smith", "Guadalupean", age.ADULT)),0,20);
+		ReservationInfo info = new ReservationInfo(1201L, List.of(new Passenger("" + Math.random(), "John", "Smith", "Guadalupean", age.ADULT)),0, false,20);
 		given(requestSpec)
 		.contentType(ContentType.JSON)
 		.body(info)
@@ -75,6 +75,19 @@ public class APITests {
 			.post("/book")
 		.then()
 			.assertThat().statusCode(201);
+		
+	}
+	
+	@Test
+	public void Check_BackgroundCheck_403() {
+		ReservationInfo info = new ReservationInfo(1201L, List.of(new Passenger("" + Math.random(), "Dick", "Rojas", "Guadalupean", age.ADULT)),0, false,20);
+		given(requestSpec)
+		.contentType(ContentType.JSON)
+		.body(info)
+		.when()
+			.post("/book")
+		.then()
+			.assertThat().statusCode(403);
 		
 	}
 	

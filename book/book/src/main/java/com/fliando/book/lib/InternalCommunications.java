@@ -2,42 +2,67 @@ package com.fliando.book.lib;
 
 import static io.restassured.RestAssured.given;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpRequest.BodyPublishers;
+import java.net.http.HttpResponse.BodyHandlers;
+
+import com.fliando.book.controller.UnknownFlightOrUnreachableFlightServiceException;
+import com.fliando.book.controller.WrongPriceOrUnreachablePriceServiceException;
+
 import io.restassured.http.ContentType;
 
 public class InternalCommunications {
-	private static String address = "http://localhost:8085/logs";
 
 	public static void log(String body) {
+		String address = "http://localhost:8085/logs";
 		try {
-			given().contentType(ContentType.JSON).body(body).
-			post(address);
+			
+			HttpClient client = HttpClient.newHttpClient();
+			
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).POST(BodyPublishers.ofString(body)).build();
+			
+			client.sendAsync(request, BodyHandlers.ofString()).join();
+			
 		} catch(Exception e) {
 			// TODO: Maybe log the fact that the other microservice is not available?
 			// We mainly are interested on decoupling from failure to respond
 		}
 	}
-
-	public static void post(String address, String body) {
-		given().contentType(ContentType.JSON).body(body).
-		post(address);
-	}
 	
-	public static boolean checkFlightExists(long id) {
-		String path = "http://localhost:8084/flights/" + id;
+	public static boolean checkFlightExists(long id) throws UnknownFlightOrUnreachableFlightServiceException {
 		
-		return given().contentType(ContentType.JSON).get(path).then().extract().statusCode() == 200;
+		String address = "http://localhost:8084/flights/" + id;
+		
+		HttpClient client = HttpClient.newHttpClient();
+		
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
+		
+		int code;
+		try {
+			code = client.send(request, BodyHandlers.ofString()).statusCode();
+		} catch (Exception e) {
+			throw new UnknownFlightOrUnreachableFlightServiceException();
+		}
+		
+		return code == 200;
 		
 	}
 
-	public static int checkPrice(long flightId, int toddlers, int children, int adults, int luggage) {
+	public static int checkPrice(long flightId, int toddlers, int children, int adults, int luggage, boolean roundTrip) throws WrongPriceOrUnreachablePriceServiceException {
 		try {
-			String path = "http://localhost:8082/price?flightId=" + flightId + "&toddlers=" + toddlers + "&children=" + children + "&adults=" + adults + "&luggage=" + luggage;
+			String address = "http://localhost:8082/price?flightId=" + flightId + "&toddlers=" + toddlers + "&children=" + children + "&adults=" + adults + "&luggage=" + luggage + "&roundTrip=" + roundTrip;
 			
-			//System.out.println((String) given().contentType(ContentType.JSON).get(path).then().extract().path("$"));
-			return Integer.parseInt(given().contentType(ContentType.JSON).get(path).then().extract().asString());
-		
+			HttpClient client = HttpClient.newHttpClient();
+			
+			HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
+			
+			return Integer.parseInt(client.send(request, BodyHandlers.ofString()).body());
+			
 		} catch(Exception e) {
-			return -1;
+			throw new WrongPriceOrUnreachablePriceServiceException();
 		}
 	}
 }

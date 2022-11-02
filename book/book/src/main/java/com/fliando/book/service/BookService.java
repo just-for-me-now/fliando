@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.fliando.book.controller.IdentityTheftException;
-import com.fliando.book.controller.UnknownFlightException;
-import com.fliando.book.controller.WrongPriceException;
+import com.fliando.book.controller.NoFlyListException;
+import com.fliando.book.controller.UnknownFlightOrUnreachableFlightServiceException;
+import com.fliando.book.controller.WrongPassengersException;
+import com.fliando.book.controller.WrongPriceOrUnreachablePriceServiceException;
 import com.fliando.book.lib.InternalCommunications;
 import com.fliando.book.model.Passenger;
 import com.fliando.book.model.ReservationInfo;
@@ -25,11 +27,15 @@ public class BookService {
 		this.passengerRepo = passengerRepo;
 	}
 
-	public void checkMakeReservation(ReservationInfo reservationInfo) throws UnknownFlightException, WrongPriceException, IdentityTheftException {
+	public void checkMakeReservation(ReservationInfo reservationInfo) throws Exception {
 		
-		if(reservationInfo == null || reservationInfo.getPassengers() == null) throw new UnknownFlightException();
+		if(reservationInfo == null || reservationInfo.getPassengers() == null) throw new WrongPassengersException();
 		
-		InternalCommunications.log(String.format("Book - Booking request received for flight id #%d for %d people.", reservationInfo.getFlightId(), reservationInfo.getPassengers().size()));
+		InternalCommunications.log(String.format("Book - Booking request received for flight id #%d for %d people.", 
+													reservationInfo.getFlightId(), 
+													reservationInfo.getPassengers().size()));
+
+		backgroundCheck(reservationInfo.getPassengers());
 		
 		checkWithTheFlightsServiceIfTheFlightExists(reservationInfo);
 		
@@ -48,13 +54,13 @@ public class BookService {
 		return (List<Passenger>) passengerRepo.findAll();
 	}
 
-	private void checkWithTheFlightsServiceIfTheFlightExists(ReservationInfo reservationInfo) throws UnknownFlightException {
+	private void checkWithTheFlightsServiceIfTheFlightExists(ReservationInfo reservationInfo) throws UnknownFlightOrUnreachableFlightServiceException {
 		if(!InternalCommunications.checkFlightExists(reservationInfo.getFlightId())) {
-			throw new UnknownFlightException();
+			throw new UnknownFlightOrUnreachableFlightServiceException();
 		}
 	}
 
-	private void checkWithThePriceServiceIfThePriceIsCorrect(ReservationInfo reservationInfo) throws WrongPriceException {
+	private void checkWithThePriceServiceIfThePriceIsCorrect(ReservationInfo reservationInfo) throws WrongPriceOrUnreachablePriceServiceException {
 		int toddlers = 0, children = 0, adults = 0;
 		
 		for(Passenger passenger : reservationInfo.getPassengers()) {
@@ -71,8 +77,14 @@ public class BookService {
 			}
 		}
 		
-		if(InternalCommunications.checkPrice(reservationInfo.getFlightId(), toddlers, children, adults, reservationInfo.getLuggage()) != reservationInfo.getPrice()) {
-			throw new WrongPriceException();
+		if(InternalCommunications.checkPrice(reservationInfo.getFlightId(), toddlers, children, adults, reservationInfo.getLuggage(), reservationInfo.isRoundTrip()) != reservationInfo.getPrice()) {
+			throw new WrongPriceOrUnreachablePriceServiceException();
+		}
+	}
+
+	private void backgroundCheck(List<Passenger> passengers) throws NoFlyListException {
+		for(Passenger passenger : passengers) {
+			if(passenger.getFirstName().equals("Dick") && passenger.getLastName().equals("Rojas")) throw new NoFlyListException();
 		}
 	}
 
@@ -82,9 +94,9 @@ public class BookService {
 			
 			if(!found.isEmpty()) {
 				
-				if(passenger.getFirstName().equals(found.get().getFirstName()) ||
-						passenger.getLastName().equals(found.get().getLastName()) ||
-						passenger.getNationality().equals(found.get().getNationality())) {
+				if(!passenger.getFirstName().equals(found.get().getFirstName()) ||
+						!passenger.getLastName().equals(found.get().getLastName()) ||
+						!passenger.getNationality().equals(found.get().getNationality())) {
 					throw new IdentityTheftException();
 				} else if(passenger.getAge() != found.get().getAge()) {
 					passengerRepo.save(passenger);

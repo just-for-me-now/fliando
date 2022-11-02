@@ -22,11 +22,14 @@ public class ReservationInfo {
 	private int luggage;
 	
 	private int price;
+	
+	private boolean roundTrip;
 
-	public ReservationInfo(long flightId, List<Passenger> passengers, int luggage, int price) {
+	public ReservationInfo(long flightId, List<Passenger> passengers, int luggage, boolean roundTrip, int price) {
 		this.flightId = flightId;
 		this.passengers = passengers;
 		this.luggage = luggage;
+		this.roundTrip = roundTrip;
 		this.price = price;
 	}
 
@@ -62,5 +65,13 @@ public class ReservationInfo {
 
 	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public boolean isRoundTrip() {
+		return roundTrip;
+	}
+
+	public void setRoundTrip(boolean roundTrip) {
+		this.roundTrip = roundTrip;
 	}
 }
