@@ -8,7 +8,9 @@ const Destination = (props) =>{
         <Card>
             <label for="destination">Destination</label>
             <select name="destination" id="destination">
-                <option value></option>
+                <>
+                <option value>                   </option>
+                </>
             </select>
         </Card>
     )

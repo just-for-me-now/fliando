@@ -19,7 +19,7 @@ const SelectFlight = (props) => {
 
   return (
     <>
-      <h2 className="titleh2">Where are you flying?</h2>
+      <h2 className="titleh2">Where are you flying to?</h2>
       <Card className="flightBox">
         <Origin />
         <Destination />
