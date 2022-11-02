@@ -37,14 +37,14 @@ public class FlightService {
 
 	public List<Origin> findAllOrigins() {
 		
-		InternalCommunications.log("Flight - Get request recieved: /origins ");
+		InternalCommunications.log("Flight - Get request received: /origins ");
 
 		return (List<Origin>) originsRepo.findAll();
 	}
 
 	public List<Destination> findAllDestinations(long id) throws OriginUnknownException {
 		
-		InternalCommunications.log(String.format("Flight - Get request recieved: /origins/%d/destinations", id));
+		InternalCommunications.log(String.format("Flight - Get request received: /origins/%d/destinations", id));
 		
 		Origin origin = getOrigin(id);
 		
@@ -53,7 +53,7 @@ public class FlightService {
 
 	public List<Flight> findDates(long originId, long destinationId, LocalDateTime date) throws OriginUnknownException, DestinationUnknownException {
 		
-		InternalCommunications.log(String.format("Flight - Get request recieved: /origins/%d/destinations/%d/dates/%s",
+		InternalCommunications.log(String.format("Flight - Get request received: /origins/%d/destinations/%d/dates/%s",
 														originId, 
 														destinationId, 
 														date.toLocalDate().toString()));
@@ -73,7 +73,7 @@ public class FlightService {
 
 	public FlightAsReturned findFlight(long id) throws FlightNotFoundException {
 		
-		InternalCommunications.log(String.format("Flight - Get request recieved: /flights/%d", id));
+		InternalCommunications.log(String.format("Flight - Get request received: /flights/%d", id));
 		
 		Flight flight = getFlight(id);
 		
