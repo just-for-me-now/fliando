@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const PassengerForm = (props) =>{
     const [enteredName, setEnteredName] = useState('');
     const [enteredSurame, setEnteredSurname] = useState('');
+    const [enteredNationality, setEnteredNationality] = useState('');
     const [enteredNif, setEnteredNif] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
 
     const PassengerHandler = (props) => {
         setEnteredName('');
         setEnteredSurname('');
+        setEnteredNationality('');
         setEnteredNif('');
         setEnteredAge('');
     }
@@ -19,6 +21,10 @@ const PassengerForm = (props) =>{
 
     const surnameChangeHandler = (event) => {
         setEnteredSurname(event.target.value);
+    }
+
+    const nationalityChangeHandler = (event) => {
+        setEnteredNationality(event.target.value)
     }
 
     const nifChangeHandler = (event) => {
@@ -37,6 +43,8 @@ const PassengerForm = (props) =>{
             <input id="name" type="text" value onChange={nameChangeHandler} />
             <label htmlFor="surname">Surname</label>
             <input id="surname" type="text" value onChange={surnameChangeHandler} />
+            <label htmlFor="nationality">Nationality</label>
+            <input id="nationality" type="text" value onChange={nationalityChangeHandler} />
             <label htmlFor="nif">NIF/Passport</label>
             <input type="text" value onChange={nifChangeHandler} />
             <label for="age">Age</label>
