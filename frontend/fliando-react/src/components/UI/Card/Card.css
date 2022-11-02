@@ -1,0 +1,13 @@
+.flightBox{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-basis: auto;
+    justify-content: space-between;
+    width: 60rem;
+    border: 4px solid blue;
+}
+.titleh2{
+    justify-content:center;
+    flex-direction: row;
+}
