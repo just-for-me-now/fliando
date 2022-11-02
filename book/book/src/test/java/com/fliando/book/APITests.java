@@ -38,7 +38,23 @@ public class APITests {
 	
 	@Test
 	public void Check_Correct_Price_Value_Return_Correct_Value() {
-		ReservationInfo info = new ReservationInfo(40400,0,0,1,1,100);
+		ReservationInfo info = new ReservationInfo(400,0,0,1,1,100);
+		given(requestSpec)
+		.when()
+			.get("/price")
+			
+		
+		
+	}
+	
+	@Test
+	public void Check_Correct_Price_Value_Return_Incorrect_Value() {
+		ReservationInfo info = new ReservationInfo(400,0,0,1,1,100);
+		given(requestSpec)
+		.when()
+			.get("/price")
+			
+		
 		
 	}
 	
