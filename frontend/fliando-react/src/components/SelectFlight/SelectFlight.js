@@ -24,7 +24,7 @@ const SelectFlight = (props) => {
         <Origin />
         <Destination />
         <Date />
-        <Button type="submit" /> Search <Button />
+        <Button type="submit"> Search </Button>
       </Card>
     </>
   );
