@@ -3,6 +3,7 @@ package com.fliando.flights;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -22,8 +23,8 @@ public class APItests {
 		requestSpec = new RequestSpecBuilder()
 				.setBaseUri("http://localhost:8084")
 				.build();
-		LocalDateTime date = LocalDateTime.now().plusDays(15);
-		dateAsString = date.getYear() + "-" + date.getMonthValue() + "-" + date.getDayOfMonth(); 
+		LocalDate date = LocalDate.now().plusDays(15);
+		dateAsString = date.toString(); 
 		
 	}
 	
@@ -97,6 +98,30 @@ public class APItests {
 		.then()
 			.assertThat()
 			.statusCode(200);
+		
+	}
+	
+	@Test
+	public void GetFlight_CorrectRequest_ReturnsFlight() {
+
+		given(requestSpec)
+		.when()
+			.get("/flights/1")
+		.then()
+			.assertThat()
+			.statusCode(200);
+		
+	}
+	
+	@Test
+	public void GetFlight_NoFlight_404() {
+
+		given(requestSpec)
+		.when()
+			.get("/flights/10000")
+		.then()
+			.assertThat()
+			.statusCode(404);
 		
 	}
 	

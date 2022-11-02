@@ -2,6 +2,7 @@ package com.fliando.flights;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.Date;
 import java.util.List;
@@ -175,13 +176,22 @@ public class Prepopulator implements CommandLineRunner {
 	}
 	
 	public void getFlights(Destination d) {
+		
 		LocalDateTime now = LocalDateTime.now();
+		
 		for(int i = 1; i <= 30; i++) {
-			LocalDateTime morningFlight = now.plusDays(i).withHour(7).withMinute(0);
-			LocalDateTime afternoonFlight = now.plusDays(i).withHour(19).withMinute(0);
+			
+			LocalDateTime morning = now.plusDays(i).truncatedTo(ChronoUnit.DAYS).plusHours(8);
+			LocalDateTime afternoon = morning.plusHours(12);
+			
+			Flight morningFlight = new Flight(airline(), scales(), halfAndHalf(), halfAndHalf(), morning);
+			Flight afternoonFlight = new Flight(airline(), scales(), halfAndHalf(), halfAndHalf(), afternoon);
+			
+			morningFlight.setDestination(d);
+			afternoonFlight.setDestination(d);
 
-			flightsRepo.save(new Flight(d, airline(), scales(), halfAndHalf(), halfAndHalf(), morningFlight));
-			flightsRepo.save(new Flight(d, airline(), scales(), halfAndHalf(), halfAndHalf(), afternoonFlight));
+			flightsRepo.save(morningFlight);
+			flightsRepo.save(afternoonFlight);
 		}
 		
 	}
