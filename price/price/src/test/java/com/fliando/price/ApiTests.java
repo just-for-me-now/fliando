@@ -1,16 +1,14 @@
 package com.fliando.price;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-import static org.hamcrest.Matchers.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-
-import static io.restassured.RestAssured.*;
 
 public class ApiTests {
 	
@@ -28,11 +26,11 @@ public class ApiTests {
 		//GET /price?flightId={id}&toddlers=0&children=0&adults=1&luggage=3
 		given(requestSpec)		
 		.when()
-			.get("/price?flightId=1&toddlers=1&children=0&adults=1luggage=0")
+			.get("/price?flightId=1&toddlers=1&children=0&adults=1&luggage=0")
 		.then()
 			.assertThat()
-			.statusCode(200)
 			.contentType(ContentType.JSON)
+			.statusCode(200)
 			.body("$.price", equalTo("50"));
 	}
 	
@@ -40,7 +38,7 @@ public class ApiTests {
 	public void Get_RetreiveAllParams_ReturnsBadRequest() {
 		given(requestSpec)		
 		.when()
-			.get("/price?flightId=0&toddlers=0&children=0&adults=0luggage=0")
+			.get("/price?flightId=0&toddlers=0&children=0&adults=0&luggage=0")
 		.then()
 			.assertThat()
 			.statusCode(400)
@@ -52,7 +50,7 @@ public class ApiTests {
 	public void Get_RetreiveWrongFlight_ReturnBadRequest() {
 		given(requestSpec)
 		.when()
-			.get("/price?flightId=81312313534534531&toddlers=0&children=0&adults=1luggage=0")
+			.get("/price?flightId=81312313534534531&toddlers=0&children=0&adults=1&luggage=0")
 		.then()
 			.assertThat()
 			.statusCode(400)

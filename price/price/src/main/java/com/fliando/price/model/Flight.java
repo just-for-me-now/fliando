@@ -4,39 +4,48 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
+
 public class Flight {
 
 	private long id;
 	
-	private long destination;
-
 	private String airline;
 	
 	private boolean scales;
 	
-	private boolean roundTrip;
-	
 	@JsonProperty("luggage-allowed")
 	private boolean luggageAllowed;
 	
-	private LocalDateTime date;
-	
-	public Flight(long destination, boolean scales,boolean roundTrip, boolean luggageAllowed, LocalDateTime date) {
-		this.destination = destination;
-		this.scales = scales;
-		this.roundTrip = roundTrip;
-		this.luggageAllowed = luggageAllowed;
-		this.date = date;
-	}
+	@JsonProperty("round-trip")
+	private boolean roundTrip;
 
+	private LocalDateTime time;
+	
+	private String origin;
+	
+	private String destination;
+
+	public Flight(long id, String airline, boolean scales, boolean luggageAllowed, boolean roundTrip,
+			LocalDateTime time, String origin, String destination) {
+		this.id = id;
+		this.airline = airline;
+		this.scales = scales;
+		this.luggageAllowed = luggageAllowed;
+		this.roundTrip = roundTrip;
+		this.time = time;
+		this.origin = origin;
+		this.destination = destination;
+	}
+	
 	public Flight() {}
 
-	public long getDestination() {
-		return destination;
+	public long getId() {
+		return id;
 	}
 
-	public void setDestination(long destination) {
-		this.destination = destination;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getAirline() {
@@ -47,7 +56,7 @@ public class Flight {
 		this.airline = airline;
 	}
 
-	public boolean getScales() {
+	public boolean isScales() {
 		return scales;
 	}
 
@@ -63,18 +72,6 @@ public class Flight {
 		this.luggageAllowed = luggageAllowed;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
-	}
-
-	public long getId() {
-		return id;
-	}
-
 	public boolean isRoundTrip() {
 		return roundTrip;
 	}
@@ -83,13 +80,35 @@ public class Flight {
 		this.roundTrip = roundTrip;
 	}
 
-	@Override
-	public String toString() {
-		return "Flight [id=" + id + ", destination=" + destination + ", airline=" + airline + ", scales=" + scales
-				+ ", roundTrip=" + roundTrip + ", luggageAllowed=" + luggageAllowed + ", date=" + date + "]";
+	public LocalDateTime getTime() {
+		return time;
 	}
 
-	
-	
+	public void setTime(LocalDateTime time) {
+		this.time = time;
+	}
 
+	public String getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	@Override
+	public String toString() {
+		return "Flight [id=" + id + ", airline=" + airline + ", scales=" + scales + ", luggageAllowed=" + luggageAllowed
+				+ ", roundTrip=" + roundTrip + ", time=" + time + ", origin=" + origin + ", destination=" + destination
+				+ "]";
+	}
+	
 }

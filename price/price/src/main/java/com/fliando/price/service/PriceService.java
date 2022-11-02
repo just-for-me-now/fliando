@@ -2,6 +2,9 @@ package com.fliando.price.service;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fliando.price.controller.IllegalLuggageException;
 import com.fliando.price.controller.InvalidNumberOfPeopleException;
 import com.fliando.price.controller.NotEvenAnAdultException;
 import com.fliando.price.controller.TooManyReservationsException;
@@ -11,8 +14,6 @@ import com.fliando.price.model.Flight;
 @Service
 public class PriceService {
 
-	private int basePrice = 50;
-
 	private int baseAdult = 20;
 
 	private int baseChild = 10;
@@ -20,11 +21,37 @@ public class PriceService {
 	private int baseLuggage = 15;
 
 	public int calculatePrice(long flightId, int toddlers, int children, int adults, int luggage)
-			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException {
+			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException, IllegalLuggageException, JsonMappingException, JsonProcessingException {
 
-		InternalCommunication.post("http://localhost:8085/logs", "Price - Post request received");
+		InternalCommunication.log("Price - Post request received");
 		
-		int totalPrice = 50;
+		int totalPrice = getPriceFromPeople(toddlers, children, adults);
+		
+		Flight flight = InternalCommunication.get("http://localhost:8084/flights", flightId);
+
+		
+		if (!flight.isLuggageAllowed() && luggage>0 || luggage<0) {
+			throw new IllegalLuggageException();
+		}
+		
+		if (flight.isLuggageAllowed()) {
+			totalPrice += (baseLuggage * luggage);
+		}
+
+		totalPrice=(int)(checkAirLine(flight)*totalPrice);
+		
+		//This always last
+		if (flight.isRoundTrip()) {
+			totalPrice=(int)(1.7*totalPrice);
+		}
+		
+		return totalPrice;
+		
+	}
+
+	private int getPriceFromPeople(int toddlers, int children, int adults)
+			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException {
+		int totalPrice = 0;
 
 		if (toddlers < 0 || children < 0 || adults < 0) {
 			throw new InvalidNumberOfPeopleException();
@@ -36,28 +63,9 @@ public class PriceService {
 			throw new NotEvenAnAdultException();
 		}
 
-		Flight flight = InternalCommunication.get("http://localhost:8084/flights", flightId);
+		totalPrice += baseAdult * adults;
 
-		if (adults > 1) {
-			totalPrice += (baseAdult * (adults - 1));
-		}
-
-		if (children > 0) {
-			totalPrice += (baseChild * children);
-		}
-
-		if (flight.isLuggageAllowed()) {
-			totalPrice += (baseLuggage * luggage);
-		}
-		// TODO: add boolean roundTrip
-		
-		totalPrice=(int)(totalPrice*checkAirLine(flight));
-		
-		//This always last
-		if (flight.isRoundTrip()) {
-			totalPrice=(int)(totalPrice*1.7);
-		}
-		
+		totalPrice += baseChild * children;
 		return totalPrice;
 	}
 
