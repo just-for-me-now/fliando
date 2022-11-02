@@ -16,6 +16,7 @@ import com.fliando.flights.controller.OriginUnknownException;
 import com.fliando.flights.lib.InternalCommunications;
 import com.fliando.flights.model.Destination;
 import com.fliando.flights.model.Flight;
+import com.fliando.flights.model.FlightAsReturned;
 import com.fliando.flights.model.Origin;
 import com.fliando.flights.repo.IDestinationsRepository;
 import com.fliando.flights.repo.IFlightsRepository;
@@ -70,15 +71,13 @@ public class FlightService {
 		
 	}
 
-	public Flight findFlight(long id) throws FlightNotFoundException {
+	public FlightAsReturned findFlight(long id) throws FlightNotFoundException {
 		
 		InternalCommunications.log(String.format("Flight - Get request recieved: /flights/%d", id));
 		
-		Optional<Flight> flight = flightsRepo.findById(id);
+		Flight flight = getFlight(id);
 		
-		if(flight.isEmpty()) throw new FlightNotFoundException();
-		
-		return flight.get();
+		return flight.asReturned();
 		
 	}
 	
@@ -123,5 +122,13 @@ public class FlightService {
 		return first;
 		
 	}
+	
+	private Flight getFlight(long id) throws FlightNotFoundException {
+		Optional<Flight> oFlight = flightsRepo.findById(id);
+		
+		if(oFlight.isEmpty()) throw new FlightNotFoundException();
+		return oFlight.get();
+	}
+	
 
 }

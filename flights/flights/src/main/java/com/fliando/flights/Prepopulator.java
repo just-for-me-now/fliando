@@ -184,8 +184,8 @@ public class Prepopulator implements CommandLineRunner {
 			LocalDateTime morning = now.plusDays(i).truncatedTo(ChronoUnit.DAYS).plusHours(8);
 			LocalDateTime afternoon = morning.plusHours(12);
 			
-			Flight morningFlight = new Flight(airline(), scales(), halfAndHalf(), halfAndHalf(), morning);
-			Flight afternoonFlight = new Flight(airline(), scales(), halfAndHalf(), halfAndHalf(), afternoon);
+			Flight morningFlight = new Flight(airline(), halfAndHalf(), halfAndHalf(), halfAndHalf(), morning);
+			Flight afternoonFlight = new Flight(airline(), halfAndHalf(), halfAndHalf(), halfAndHalf(), afternoon);
 			
 			morningFlight.setDestination(d);
 			afternoonFlight.setDestination(d);
