@@ -2,6 +2,8 @@ package com.fliando.price.service;
 
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fliando.price.controller.IllegalLuggageException;
 import com.fliando.price.controller.InvalidNumberOfPeopleException;
 import com.fliando.price.controller.NotEvenAnAdultException;
@@ -19,7 +21,7 @@ public class PriceService {
 	private int baseLuggage = 15;
 
 	public int calculatePrice(long flightId, int toddlers, int children, int adults, int luggage)
-			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException, IllegalLuggageException {
+			throws InvalidNumberOfPeopleException, TooManyReservationsException, NotEvenAnAdultException, IllegalLuggageException, JsonMappingException, JsonProcessingException {
 
 		InternalCommunication.log("Price - Post request received");
 		

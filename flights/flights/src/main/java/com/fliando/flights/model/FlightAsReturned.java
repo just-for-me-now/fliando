@@ -1,7 +1,12 @@
 package com.fliando.flights.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FlightAsReturned extends Flight {
+	
+	@JsonProperty("origin")
 	private String originName;
+	@JsonProperty("destination")
 	private String destinationName;
 	
 	public FlightAsReturned(long id) {
