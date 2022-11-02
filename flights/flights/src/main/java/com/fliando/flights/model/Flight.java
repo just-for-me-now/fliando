@@ -3,6 +3,7 @@ package com.fliando.flights.model;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,9 +28,11 @@ public class Flight {
 	private boolean scales;
 	
 	@Column(name="luggage-allowed")
+	@JsonProperty("luggage-allowed")
 	private boolean luggageAllowed;
 	
 	@Column(name="round-trip")
+	@JsonProperty("round-trip")
 	private boolean roundTrip;
 	
 	private LocalDateTime time;
