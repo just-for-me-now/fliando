@@ -8,7 +8,9 @@ const Date = (props) =>{
         <Card>
             <label for="date">Date</label>
             <select name="date" id="date">
-                <option value></option>
+            <>
+                <option value>                   </option>
+                </>
             </select>
         </Card>
     )

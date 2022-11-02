@@ -9,7 +9,10 @@ const Origin = (props) =>{
         <Card>
             <label for="origin">Origin</label>
             <select name="origin" id="origin">
-                <option value></option>
+                <>
+                <option value>                   </option>
+                </>
+                
             </select>
         </Card>
     )

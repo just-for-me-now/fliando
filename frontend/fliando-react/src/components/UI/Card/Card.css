@@ -17,4 +17,16 @@
 .titleh2{
     justify-content:center;
     flex-direction: row;
+    font-style: italic;
+}
+.btn-search{
+    border-radius: 2px;
+    border: 1px solid rgb(71, 59, 59);
+}
+label{
+    padding-right: .5rem;
+    letter-spacing: 1.3px;
+}
+select{
+    cursor: pointer;
 }
