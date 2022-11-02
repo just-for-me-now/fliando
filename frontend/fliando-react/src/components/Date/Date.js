@@ -6,7 +6,7 @@ const Date = (props) =>{
 
     return(
         <Card>
-            <label for="date">Origin</label>
+            <label for="date">Date</label>
             <select name="date" id="date">
                 <option value></option>
             </select>
