@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
+
 public class Flight {
 
 	private long id;
@@ -15,6 +17,7 @@ public class Flight {
 	@JsonProperty("luggage-allowed")
 	private boolean luggageAllowed;
 	
+	@JsonProperty("round-trip")
 	private boolean roundTrip;
 
 	private LocalDateTime date;
