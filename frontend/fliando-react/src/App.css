@@ -1,17 +1,23 @@
 *{
   box-sizing:border-box;
-  background-color: rgb(255, 247, 237);
+  background-color: rgb(245, 233, 233);
 }
 html{
   margin:0 auto;
   padding: 0;
+  
 }
 body{
+  background-image: url('components/Images/Airport-Wallpapers-HD-opacity.png');
   width: 100vw;
   margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  padding-bottom: 2rem;
+  padding: 0 2rem 2rem 2rem;
+}
+nav{
+  padding-top:30px;
+  font-family: 'Libre Baskerville', serif;
 }

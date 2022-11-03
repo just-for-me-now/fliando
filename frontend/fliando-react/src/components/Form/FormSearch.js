@@ -10,7 +10,7 @@ const FormSearch = () => {
   const [destinations, setDestinations] = useState({})
   const [dateValue, setDateValue] = useState({});
   const [id, setId] = useState({});
-  
+  const myObj = {};
   //handlers
   const handleOrigin = (e) =>{
     setOrigin(e.target.value)
@@ -45,11 +45,11 @@ const FormSearch = () => {
   /*fetch */
   // console.log('Valor de origin -> '+origin)
   return (
-    <form className="flightBox" onSubmit={submitSearch}>
+    <form className="flightBox mainCSS" onSubmit={submitSearch}>
       <Card>
         <label htmlFor="origin">Origin</label>
         <select name="origin" id="origin" onChange={handleOrigin}>
-        {data?.map((elem, index) => <option key={index} value={elem.destinations}>{elem.name}</option>)}
+        {data?.map((elem, index) => <option key={index} value={elem}>{elem.name}</option>)}
         </select>
       </Card>
 
@@ -57,7 +57,7 @@ const FormSearch = () => {
         <label htmlFor="destination">Destination</label>
         <select name="destination" id="destination" value={origin} onChange={handleChange}>
         <option>---------</option>
-        { origin?.destinations?.map((elem) => { return (<option key={elem.id}>{elem.destinations}</option>);})}
+        { origin?.destinations?.map((elem) => <option key={elem.id} value={elem.name}>{elem.name}</option>)}
         </select>
       </Card>
 
