@@ -27,7 +27,7 @@ const Flight = props => {
             <div className="flight-main">
                 <div className="flight-itinerary">
                     <div className="flight-origin">{props.origin}</div>
-                    <div className="flight-arrow">{"->"}</div>
+                    <div className="flight-arrow">{"➡"}</div>
                     <div className="flight-destination">{props.destination}</div>
                 </div>
                 <div className="flight-date">
