@@ -9,17 +9,17 @@ const FormSearch = () => {
   const [origin, setOrigin] = useState(null);
   const [destinations, setDestinations] = useState(null)
   const [dateValue, setDateValue] = useState(null);
+  const [id, setId] = useState(null);
   
   //handlers
   const handleOrigin = (e) =>{
     setOrigin(e.target.value)
-    console.log("target value e -> "+e.target.value)
     console.log("target value origin -> "+origin)
   }
   //const [search, setSearch] = useState({});
 
   const handleChange = (e) => {
-    console.log("handle change ->"+e)
+    // console.log("handle change ->"+e)
 
   };
   const submitSearch = (e) => {
@@ -33,9 +33,9 @@ const FormSearch = () => {
 
   /*fetch */
   const { data, loading, error, refetch } = useFetch(
-    "http://localhost:8084/origins"
-  );
-  console.log(data)
+    `http://localhost:8084/origins`
+  )
+  // console.log(data)
   if (loading) {
     //return <p>LOADING...</p>;
   }
@@ -43,20 +43,22 @@ const FormSearch = () => {
     //return <p className="errorMessage"></p>;
   }
   /*fetch */
-  console.log('Valor de origin -> '+origin)
+  // console.log('Valor de origin -> '+origin)
   return (
     <form className="flightBox" onSubmit={submitSearch}>
       <Card>
         <label htmlFor="origin">Origin</label>
-        <select name="origin" id="origin" onChange={handleOrigin}>
-        {data?.map(elem => <option value={elem}>{elem.name}</option>)}
+        <select name="origin" id="origin" onClick={refetch} onChange={handleOrigin}>
+          <option>---------</option>
+        {data?.map((elem, index) => <option key={index} value={Object.values(elem)}>{elem.name}</option>)}
         </select>
       </Card>
 
       <Card>
         <label htmlFor="destination">Destination</label>
-        <select name="destination" id="destination" onChange={handleChange}>
-        { origin?.destinations?.map((elem, index) => { return (<option key={index}>{elem.name}</option>);})}
+        <select name="destination" id="destination" value={origin} onChange={handleChange}>
+        <option>---------</option>
+        { origin?.name?.map((elem) => { return (<option key={elem.id}>{elem.name}</option>);})}
         </select>
       </Card>
 
