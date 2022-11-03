@@ -48,7 +48,7 @@ const FormSearch = () => {
     <form className="flightBox" onSubmit={submitSearch}>
       <Card>
         <label htmlFor="origin">Origin</label>
-        <select name="origin" id="origin" onClick={refetch} onChange={handleOrigin}>
+        <select name="origin" id="origin" onChange={handleOrigin}>
           <option>---------</option>
         {data?.map((elem, index) => <option key={index} value={Object.values(elem)}>{elem.name}</option>)}
         </select>
@@ -58,7 +58,7 @@ const FormSearch = () => {
         <label htmlFor="destination">Destination</label>
         <select name="destination" id="destination" value={origin} onChange={handleChange}>
         <option>---------</option>
-        { origin?.name?.map((elem) => { return (<option key={elem.id}>{elem.name}</option>);})}
+        { origin?.destinations?.map((elem) => { return (<option key={elem.id}>{elem.destinations}</option>);})}
         </select>
       </Card>
 
