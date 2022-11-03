@@ -1,54 +1,30 @@
 import { useState } from "react";
 import Flight from "./Flight";
+import FlightFilter from "./FlightFilter";
 import './FlightContainer.css';
 
-const FlightContainer = () => {
-
-    const flights = [
-        {
-            "id":"1",
-            "origin": "Sevilla",
-            "destination": "Lisboa",
-            "time":{"date":"2022-11-11","time":"11:45"},
-            "airline": "Lufthansa",
-            "scales": true,
-            "pricePerAdult": 50,
-        },
-        {
-            "id":"2",
-            "origin": "Valencia",
-            "destination": "Chicago",
-            "time":{"date":"2022-11-15","time":"13:00"},
-            "airline": "Tam",
-            "scales": false,
-            "pricePerAdult": 50,
-        },
-        {
-            "id":"3",
-            "origin": "Sevilla",
-            "destination": "Lisboa",
-            "time":{"date":"2022-11-11","time":"11:45"},
-            "airline": "Lufthansa",
-            "scales": true,
-            "pricePerAdult": 50,
-        },
-    ]
+const FlightContainer = props => {
     
-    const [filteredFlights, setFilteredFlights] = useState(flights);
+    const [filteredFlights, setFilteredFlights] = useState([props.flights]);
 
     const handleSelect = key => {
-        setFilteredFlights(flights.filter(elem => elem.id == key))
+        setFilteredFlights(props.flights.filter(elem => elem.id == key))
     }
 
     const handleDeselect = () => {
-        setFilteredFlights(flights);
+        setFilteredFlights(props.flights);
     }
+
+    const handleFilterBy = (key, value) => {
+        // TODO
+    }
+
+    if(filteredFlights == undefined || filteredFlights.length == 0) return "";
 
     return (
         <div className="flight-container">
-            {filteredFlights.map(f => 
-                <Flight flight={f} key={f.id} id={f.id} select={handleSelect} deselect={handleDeselect} />
-            )}
+            <FlightFilter filterBy={handleFilterBy}/>
+            {props.flights?.map(f => <Flight flight={f} key={f.id} id={f.id} origin={props.origin} destination={props.destination} select={handleSelect} deselect={handleDeselect} />)}
         </div>
     );
 }
