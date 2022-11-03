@@ -5,6 +5,12 @@ nav{
     text-align: center;
     line-height: 1.5;
     letter-spacing: 0.2rem;
-    display: inline;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     /* background-color: rgb(245, 233, 233, 0.6); */
+}
+.logoImage{
+    width:120px;
+    height: 120px;
 }
