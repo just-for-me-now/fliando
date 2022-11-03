@@ -1,11 +1,12 @@
 *{
   box-sizing:border-box;
-  background-color: rgb(245, 233, 233);
+  background-color: transparent;
+  font-family: 'Libre Baskerville', serif;
 }
 html{
   margin:0 auto;
   padding: 0;
-  
+
 }
 body{
   background-image: url('components/Images/Airport-Wallpapers-HD-opacity.png');
@@ -17,7 +18,7 @@ body{
   justify-content: center;
   padding: 0 2rem 2rem 2rem;
 }
-nav{
-  padding-top:30px;
-  font-family: 'Libre Baskerville', serif;
+
+.App{
+  padding: 1rem 1.6rem;
 }

@@ -37,7 +37,7 @@ const Flight = props => {
             </div>
 
             <div className="flight-bottom">
-            {props.flight.scales ? <div className="flight-scales"> this plane has scales</div> : ""}
+            {props.flight.scales ? <div className="flight-scales"> this flight has stopovers</div> : ""}
             <div className="price-per-adult">€ { pricePerAdult ? pricePerAdult : "fetching..."}</div>
             {selected ? <Button onClick={handleCancel}>Cancel</Button> : <Button onClick={handleSelect}>Select</Button>}
             </div>
