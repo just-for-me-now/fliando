@@ -6,10 +6,10 @@ import { BrowserRouter } from 'react-router-dom';import {
   Link
 } from "react-router-dom";
 
-import Form from './components/Form/Form';
 import './App.css';
 import Header from './components/Header/Header.js';
 import SelectFlight from './components/SelectFlight/SelectFlight';
+import FormSearch from './components/Form/FormSearch';
 
 function App() {
 
@@ -19,7 +19,8 @@ function App() {
     <>
      <div className="App">
     <Header/>
-    <SelectFlight/>
+    <h2 className="titleh2">Where are you flying to?</h2>
+    <FormSearch/>
     </div>
     </>
    
