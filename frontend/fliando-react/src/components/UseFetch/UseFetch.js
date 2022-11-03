@@ -5,11 +5,11 @@ const url = "";
 
 function useFetch(url){
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState([]);
 
-    const [error, setError] = useState(null);
+    const [error, setError] = useState([]);
 
     useEffect(()=>{
 
