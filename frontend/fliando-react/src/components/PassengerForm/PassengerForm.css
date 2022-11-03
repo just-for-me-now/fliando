@@ -1,0 +1,33 @@
+label{
+    display:block;
+    padding:15px;
+}
+
+.passengerForm{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content:flex-start ;
+
+}
+
+.passengerForm>*{
+    margin-right: auto;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    box-shadow: 0 2px 5px rgb(0,0,0,0.1);
+    padding:10px;
+}
+
+input{
+    border-radius:3px;
+    font-weight: bold;
+    width: 25vw;
+}
+
+.bookButton{
+    margin-top:20px;
+}
+
+
+
+
