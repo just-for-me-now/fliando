@@ -6,10 +6,10 @@ import useFetch from "../UseFetch/UseFetch";
 
 const FormSearch = () => {
   //states
-  const [origin, setOrigin] = useState(null);
-  const [destinations, setDestinations] = useState(null)
-  const [dateValue, setDateValue] = useState(null);
-  const [id, setId] = useState(null);
+  const [origin, setOrigin] = useState({});
+  const [destinations, setDestinations] = useState({})
+  const [dateValue, setDateValue] = useState({});
+  const [id, setId] = useState({});
   
   //handlers
   const handleOrigin = (e) =>{
@@ -49,8 +49,7 @@ const FormSearch = () => {
       <Card>
         <label htmlFor="origin">Origin</label>
         <select name="origin" id="origin" onChange={handleOrigin}>
-          <option>---------</option>
-        {data?.map((elem, index) => <option key={index} value={Object.values(elem)}>{elem.name}</option>)}
+        {data?.map((elem, index) => <option key={index} value={elem.destinations}>{elem.name}</option>)}
         </select>
       </Card>
 
