@@ -1,42 +1,43 @@
-import { useState, useEffect  } from "react";
+import { useState } from "react";
 import React from "react";
 import Card from "../UI/Card/Card";
 import Button from "../UI/Button/Button";
 import useFetch from "../UseFetch/UseFetch";
 
-const FormSearch = (props) => {
-
-  const { data, loading, error, refetch } = useFetch(
-    `http://localhost:8084/origins`
-  )
+const FormSearch = props => {
   //states
+  
+  const { data } = useFetch(`http://localhost:8084/origins`)
   const [origin, setOrigin] = useState(null);
-  const [destination, setDestination] = useState(null);
-  const [date, setDate] = useState(null);
+  const [originName, setOriginName] = useState(null);
   const [destinationList, setDestinationList] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [destinationName, setDestinationName] = useState(null);
+  const [date, setDate] = useState(null);
+  
   //handlers
-  const handleOrigin = (e) =>{
-    setOrigin(e.target.value)
-    console.log(data)
-    setDestinationList(data.find(elem => elem.id ==e.target.value).destinations);
+  const handleOrigin = event => {
+    setOrigin(event.target.value);
+    const o = data.find(elem => elem.id == event.target.value);
+    setOriginName(o.name)
+    setDestinationList(o.destinations);
   }
-  //const [search, setSearch] = useState({});
 
   const handleDestination = (e) => {
-    setDestination(e.target.value)
-
+    setDestination(e.target.value);
+    const d = data.find(elem => elem.id == origin).destinations.find(elem => elem.id == e.target.value)
+    console.log(d.id)
+    setDestinationName(d.name)
   };
 
-  const handleDate = (e)=>{
-    setDate(e.target.value)
-  }  
-  const submitSearch = (e) => {
-    e.preventDefault();
-    console.log(origin);
-    console.log(destination);
-    console.log(date);
+  const handleDate = (e) => {
+    setDate(e.target.value);
+  };
 
-    props.submitSearch(origin, destination, date)
+  const submitSearch = event => {
+    event.preventDefault();
+    if(origin == null || destination == null || date == null) return;
+    props.search(origin, originName, destination, destinationName, date);
   };
 
   return (
@@ -53,7 +54,7 @@ const FormSearch = (props) => {
         <label htmlFor="destination">Destination</label>
         <select name="destination" id="destination" onChange={handleDestination}>
         <option>---------</option>
-        {destinationList ? console.log(destinationList):""}
+        
         { destinationList?.map(elem => <option key={elem.id} value={elem.id}>{elem.name}</option>)}
         </select>
       </Card>

@@ -1,30 +1,34 @@
 import { useState } from "react";
 import Flight from "./Flight";
 import FlightFilter from "./FlightFilter";
+import useFetch from "../UseFetch/UseFetch";
 import './FlightContainer.css';
 
 const FlightContainer = props => {
-    
-    const [filteredFlights, setFilteredFlights] = useState([props.flights]);
+
+    const address = `http://localhost:8084/origins/${props.origin}/destinations/${props.destination}/dates/${props.date}`;
+    const { data } = useFetch(address);
+    //const [filteredFlights, setFilteredFlights] = useState([]);
 
     const handleSelect = key => {
-        setFilteredFlights(props.flights.filter(elem => elem.id == key))
+        //setFilteredFlights(props.flights.filter(elem => elem.id == key))
     }
 
     const handleDeselect = () => {
-        setFilteredFlights(props.flights);
+        //setFilteredFlights(props.flights);
     }
 
     const handleFilterBy = (key, value) => {
         // TODO
     }
 
-    if(filteredFlights == undefined || filteredFlights.length == 0) return "";
-
     return (
         <div className="flight-container">
             <FlightFilter filterBy={handleFilterBy}/>
-            {props.flights?.map(f => <Flight flight={f} key={f.id} id={f.id} origin={props.origin} destination={props.destination} select={handleSelect} deselect={handleDeselect} />)}
+            {data?.map(elem => {
+                console.log(elem);
+                return <Flight flight={elem} key={elem.id} origin={props.originName} destination={props.destinationName} select={handleSelect} deselect={handleDeselect} />
+            })}
         </div>
     );
 }
