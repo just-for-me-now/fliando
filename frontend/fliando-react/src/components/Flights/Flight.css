@@ -1,0 +1,72 @@
+.flight {
+    width: 59vw;
+    height: 15em;
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-top {
+    display: flex;
+    justify-content: flex-end;
+    font-variant: small-caps;
+    letter-spacing: 0.3em;
+}
+
+.flight-top > * {
+    min-width: 10em;
+    border: 1px solid black;
+    border-radius: 2px;
+    text-align: center;
+}
+
+.flight-main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-grow: 1;
+    font-size: xx-large;
+    padding-right: 2em;
+    
+}
+
+.flight-bottom {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flight-bottom > * {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.flight-main > * {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 20vw;
+    border-bottom: 5px solid rgb(0, 0, 0, 0.3);
+}
+
+.flight-main > * > * {
+    display: flex;
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.flight-scales {
+    margin-right: auto;
+    position: relative;
+    left: -30px;
+    bottom: -15px;
+    color: lightslategray;
+}
+
+.price-per-adult {
+    font-size: large;
+    border-radius: 8px;
+    background-color: rgb(0, 0, 0, 0.2);
+    padding: 2px 5px;
+}
