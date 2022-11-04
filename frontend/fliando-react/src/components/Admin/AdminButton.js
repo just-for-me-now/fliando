@@ -2,7 +2,7 @@
 
 const AdminButton = props =>{
     return (
-        <button className="adminButton" onClick={props.action}>{props.text}</button>
+        <button className="adminButton button" onClick={props.action}>{props.text}</button>
 
     )
 }
