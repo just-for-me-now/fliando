@@ -1,8 +1,5 @@
 package com.fliando.book.lib;
 
-import static io.restassured.RestAssured.given;
-
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -11,8 +8,6 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 import com.fliando.book.controller.UnknownFlightOrUnreachableFlightServiceException;
 import com.fliando.book.controller.WrongPriceOrUnreachablePriceServiceException;
-
-import io.restassured.http.ContentType;
 
 public class InternalCommunications {
 

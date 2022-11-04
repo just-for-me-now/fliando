@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.fliando.users.model.User;
+import com.fliando.users.model.UserInfo;
 
-public interface IUserRepository extends CrudRepository<User, String> {
+public interface IUserRepository extends CrudRepository<UserInfo, String> {
 
-	Optional<User> findByName(String name);
+	Optional<UserInfo> findByName(String name);
 }
