@@ -27,3 +27,7 @@ input{
 .bookButton{
     margin-top:20px;
 }
+
+.button{
+    font-size: 12px;
+}
