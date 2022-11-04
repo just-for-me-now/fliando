@@ -79,7 +79,7 @@ const Passenger = (props) => {
     });*/
 
     return (
-            <Card>
+            <Card className="flightBox">
                 <fieldset>
                 <legend>PERSONAL DATA</legend>
                 <label htmlFor="name">Name</label>
@@ -97,7 +97,6 @@ const Passenger = (props) => {
                     <option value="">{">"} 9</option>
                 </select>
                 </fieldset>
-                <Button className="bookButton">BOOK</Button>
             </Card>   
     
     )
