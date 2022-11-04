@@ -11,10 +11,10 @@ public class Passenger {
 	
 	@Id
 	@JsonProperty("id-card")
-	public String idCard;
+	public String id;
 
 	@JsonProperty("first-name")
-	public String firstName;
+	public String name;
 
 	@JsonProperty("last-name")
 	public String surname;
@@ -23,10 +23,10 @@ public class Passenger {
 	
 	public age age;
 
-	public Passenger(String idCard, String firstName, String surname, String nationality,
+	public Passenger(String id, String name, String surname, String nationality,
 			com.fliando.book.model.age age) {
-		this.idCard = idCard;
-		this.firstName = firstName;
+		this.id = id;
+		this.name = name;
 		this.surname = surname;
 		this.nationality = nationality;
 		this.age = age;
@@ -35,19 +35,19 @@ public class Passenger {
 	public Passenger() {}
 
 	public String getIdCard() {
-		return idCard;
+		return id;
 	}
 
 	public void setIdCard(String idCard) {
-		this.idCard = idCard;
+		this.id = idCard;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return name;
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.name = firstName;
 	}
 
 	public String getLastName() {

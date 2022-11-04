@@ -9,6 +9,7 @@ html{
 
 }
 body{
+  font-family: 'Libre Baskerville', serif;
   background-image: url('components/Images/Airport-Wallpapers-HD-opacity.png');
   background-attachment: fixed;
   background-position: center;
@@ -21,7 +22,7 @@ body{
   flex-direction: row;
   justify-content: center;
   padding: 0 2rem 2rem 2rem;
-  font-family: 'Libre Baskerville', serif;
+  
 }
 
 .App{
