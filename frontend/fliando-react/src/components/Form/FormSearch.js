@@ -26,7 +26,6 @@ const FormSearch = props => {
   const handleDestination = (e) => {
     setDestination(e.target.value);
     const d = data.find(elem => elem.id == origin).destinations.find(elem => elem.id == e.target.value)
-    console.log(d.id)
     setDestinationName(d.name)
   };
 

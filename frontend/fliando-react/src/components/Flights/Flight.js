@@ -11,7 +11,7 @@ const Flight = props => {
     const [selected, setSelected] = useState(false);
 
     const handleSelect = () => {
-        props.select(props.id);
+        props.select(props.flight.id);
         setSelected(true);
     }
     
