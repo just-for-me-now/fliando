@@ -4,6 +4,7 @@ import Button from "../UI/Button/Button";
 import './Passenger.css'
 
 import axios from "axios";
+import PassengerButton from "./PassengerButton";
 
 
 

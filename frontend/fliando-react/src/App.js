@@ -3,8 +3,8 @@ import Header from "./components/Header/Header.js";
 import FormSearch from "./components/Form/FormSearch";
 import FlightContainer from "./components/Flights/FlightContainer";
 import Passenger from "./components/PassengerForm/Passenger.js";
+import PassengerContainer from "./components/PassengerForm/PassengerContainer.js";
 import Button from "./components/UI/Button/Button";
-
 import { useState } from "react";
 
 
@@ -37,8 +37,8 @@ function App() {
                             save={handleSaveFlightData} /> 
                         : <div />
             }
-            {/* flightData ?  <Passenger /><Button className="bookButton">BOOK</Button> : <div />*/}
-			<Passenger />
+            {/* flightData ?  <PassengerContainer /><Button className="bookButton">BOOK</Button> : <div />*/}
+			<PassengerContainer />
             <Button className="bookButton">BOOK</Button>
 
 		</div>
