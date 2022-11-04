@@ -1,11 +1,11 @@
 import React from "react";
-import PassengerForm from "./PassengerForm";
-import PassengerFormCreator from "./PassengerFormCreator";
+
+import Passenger from "./Passenger";
 
 const PassengerFormContainer = () =>{
     <div id="passengerFormContainer">
-        <PassengerForm />
-        <PassengerFormCreator />
+        <Passenger />
+        
     </div>    
 }
 
