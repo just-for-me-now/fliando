@@ -9,13 +9,14 @@ import Button from "./components/UI/Button/Button";
 import AdminLogin from "./components/Admin/AdminLogin";
 import AdminStats from "./components/Admin/AdminStats";
 import AdminButton from "./components/Admin/AdminButton";
+import axios from "axios";
 
 function App() {
 
 	const [searchData, setSearchData] = useState(null);
     const [flightData, setFlightData] = useState(null);
-    const [passengerData, setPassengerData] = useState(null);
-    const [admin, setAdmin] = useState(0)
+    const [passengerData, setPassengerData] = useState([]);
+    const [admin, setAdmin] = useState(0);
 
     const search = (origin, originName, destination, destinationName, date) => {
         setSearchData({ origin, originName, destination, destinationName, date });
@@ -25,8 +26,49 @@ function App() {
         setFlightData(data);
     }
 
-    const handlePassengers = data => {
-        setPassengerData(data);
+    const handlePassengerInput = (i, data) => {
+        
+        setPassengerData(prev => {
+            let ans = [...prev];
+            ans[i] = {
+                ...ans[i],
+                ...data,
+            };
+            return ans;
+        });
+    }
+
+    const handleNewPassenger = () => {
+        setPassengerData(prev => [
+            ...prev,
+            {
+                name: "",
+                surname: "",
+                nationality: "",
+                id: "",
+                age: 2,
+            }
+        ]);
+    }
+
+    const sendBooking = () => {
+        let body= {
+            flightId: flightData,
+            passengers: passengerData,
+            luggage: 0,
+            roundTrip: false,
+            price: 0,
+        };
+
+        axios.post(
+            "http://localhost:8086/book",body, {
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            }
+        ).then(
+            () => setAdmin(3)
+        )
     }
     
     const sendToLogin = () =>{
@@ -51,6 +93,7 @@ function App() {
             <AdminButton action={sendToMain} text={"Main"}/>
         </div>
     )
+    if(admin === 3) return <div><h1>Congratulations on finishing this app!</h1></div>
 
 	return (
 		<div className="App">
@@ -64,12 +107,11 @@ function App() {
                             destination={searchData.destination} 
                             destinationName={searchData.destinationName} 
                             date={searchData.date}
-                            save={handleSaveFlightData} /> 
+                            handleSaveFlightData={handleSaveFlightData} /> 
                         : <div />
             }
-            {/* flightData ?  <PassengerContainer /><Button className="bookButton">BOOK</Button> : <div />*/}
-			<PassengerContainer receivePassengers={handlePassengers} />
-            <Button className="bookButton">BOOK</Button>
+            { flightData ?  <PassengerContainer handlePassengerInput={handlePassengerInput} handleNewPassenger={handleNewPassenger} data={passengerData} /> : <div /> }
+             <Button className="bookButton" onClick={sendBooking} >BOOK</Button>
 
 		</div>
 	);
