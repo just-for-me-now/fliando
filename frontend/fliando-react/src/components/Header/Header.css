@@ -1,5 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
 nav{
+    font-family: 'Comfortaa', cursive;
     font-size: 2.4rem;
     color: #2C3FEA;
     text-align: center;

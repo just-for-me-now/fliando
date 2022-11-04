@@ -17,17 +17,17 @@ public class Passenger {
 	public String firstName;
 
 	@JsonProperty("last-name")
-	public String lastName;
+	public String surname;
 	
 	public String nationality;
 	
 	public age age;
 
-	public Passenger(String idCard, String firstName, String lastName, String nationality,
+	public Passenger(String idCard, String firstName, String surname, String nationality,
 			com.fliando.book.model.age age) {
 		this.idCard = idCard;
 		this.firstName = firstName;
-		this.lastName = lastName;
+		this.surname = surname;
 		this.nationality = nationality;
 		this.age = age;
 	}
@@ -51,11 +51,11 @@ public class Passenger {
 	}
 
 	public String getLastName() {
-		return lastName;
+		return surname;
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.surname = lastName;
 	}
 
 	public String getNationality() {
