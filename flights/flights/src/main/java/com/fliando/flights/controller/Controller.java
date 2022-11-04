@@ -34,12 +34,12 @@ public class Controller {
 	}
 	
 	@GetMapping(path="/origins/{originId}/destinations/{destinationId}/dates/{date}")
-	public List<Flight> retreiveDates(
+	public Flight[] retreiveDates(
 			@PathVariable long originId, 
 			@PathVariable long destinationId, 
 			@PathVariable LocalDate date) 
 					throws OriginUnknownException, DestinationUnknownException {
-		return service.findDates(originId, destinationId, date.atStartOfDay());
+		return service.findDates(originId, destinationId, date.atStartOfDay()).toArray(new Flight[0]);
 	}
 	
 	@GetMapping(path="/flights/{id}")

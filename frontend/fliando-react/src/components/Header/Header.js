@@ -6,7 +6,7 @@ const Header = () =>{
     return(
         <header>
             <nav>
-                FLIANDO
+                <h1>FLIANDO</h1>
             </nav>
         </header>
     )
