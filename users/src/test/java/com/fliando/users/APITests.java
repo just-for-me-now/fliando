@@ -3,7 +3,7 @@ package com.fliando.users;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.fliando.users.model.User;
+import com.fliando.users.model.UserInfo;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -23,7 +23,7 @@ public class APITests {
 	
 	@Test
 	public void postCorrectUsernameAndPassword() {
-		User user = new User("admin","1234");
+		UserInfo user = new UserInfo("admin","1234");
 		given(requestSpec)
 		.contentType(ContentType.JSON)
 			.body(user)
