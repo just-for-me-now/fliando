@@ -9,14 +9,14 @@ const AdminLogin = props =>{
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="loginForm" onSubmit={handleSubmit}>
             <div>
-            <label>Username</label>
+            <label>Username : </label>
             <input type="text"></input>
             </div>
-            <label>Username</label>
+            <label>Password : </label>
             <input type="password"></input>
-            <button className="button" type="submit">Submit</button>
+            <button className="button submitButton" type="submit">Submit</button>
         </form>
     )
 }

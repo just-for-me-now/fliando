@@ -27,8 +27,17 @@ body{
   padding: 1rem 1.6rem;
 }
 .adminButton{
-  position: absolute;
+  position: fixed;
   top:0;
   right:0;
   border:none;
+}
+.submitButton{
+  margin-top: 1rem;
+  justify-content: center;
+}
+.loginForm{
+  background-color: rgb(245, 233, 233, 0.83);
+  border-radius:5px;
+  padding: 1.2rem 0.4rem;
 }

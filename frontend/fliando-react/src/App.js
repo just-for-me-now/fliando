@@ -52,7 +52,7 @@ function App() {
 		<div className="App">
 			<Header />
 			<h2 className="titleh2">Where are you flying to?</h2>
-            <AdminButton action={sendToLogin} text={"Admin Login"}/>
+            <AdminButton action={sendToLogin} text={"Login"}/>
 			<FormSearch search={search} />
 			{searchData ? <FlightContainer 
                             origin={searchData.origin} 
