@@ -13,3 +13,9 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.button:hover{
+    background-color: #2c3feaac;
+    font-size: 14px;
+    transition: 0.3s;
+}
