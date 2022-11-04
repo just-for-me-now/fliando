@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import Passenger from "./Passenger";
 import PassengerButton from "./PassengerButton";
 
-const PassengerContainer = () =>{
+const PassengerContainer = props =>{
 
     const [passengers, setPassengers] = useState([{
         name:"",
@@ -12,6 +12,13 @@ const PassengerContainer = () =>{
         id:"",
         age:0
     }])
+
+    const sendPassengersUp = () => {
+        setPassengers(prev => {
+            props.receivePassengers(prev);
+            return props;
+        })
+    }
 
     const handleNewPassenger = () =>{
         setPassengers((previousState)=>[
@@ -24,11 +31,29 @@ const PassengerContainer = () =>{
                 age:0
             }
         ])
+
+        sendPassengersUp();
+    }
+
+    const handlePassengerDataChange = (id, newData) => {
+        setPassengers(
+            previousState => {
+                let newState = [...previousState];
+                for(let i = 0; i < newState.length; i++) {
+                    if(newState[i].id == id) {
+                        newState[i] = newData;
+                    }
+                }
+                return newState;
+            }
+        );
+
+        console.log(passengers);
+        sendPassengersUp();
     }
 
     return <div className="passenger-container">
-        {passengers?console.log(passengers):"nada"}
-        {passengers?.map((elem , i)=> {return <Passenger key={i} />})}
+        {passengers?.map(elem => <Passenger key={elem.id} update={handlePassengerDataChange} state={elem} />)}
         <PassengerButton newPassenger={handleNewPassenger}/>
     </div>;
 }

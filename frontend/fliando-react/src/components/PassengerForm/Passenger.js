@@ -1,45 +1,16 @@
 import React, { useState } from "react";
 import Card from "../UI/Card/Card";
-import Button from "../UI/Button/Button";
 import './Passenger.css'
-
-import axios from "axios";
-import PassengerButton from "./PassengerButton";
 
 
 
 const Passenger = (props) => {
 
-    const [enteredName, setEnteredName] = useState('');
-    const [enteredSurname, setEnteredSurname] = useState('');
-    const [enteredNationality, setEnteredNationality] = useState('');
-    const [enteredNif, setEnteredNif] = useState('');
-    const [enteredAge, setEnteredAge] = useState('');
-
-    
-
-    const PassengerHandler = (event) => {
-        event.preventDefault();
-    
-        if(enteredName.trim().length === 0 || 
-        enteredSurname.trim().length === 0 || 
-        enteredNationality.trim().length === 0||
-        enteredNif.trim().length === 0 ||
-        enteredAge.trim().length === 0)
-        {
-            return;
-        }
-        if(+enteredAge < 0){
-            return;
-        }
-    
-        
-        setEnteredName(''); 
-        setEnteredSurname('');
-        setEnteredNationality('');
-        setEnteredNif('');
-        setEnteredAge('');
-    }
+    const [enteredName, setEnteredName] = useState(props.state.name);
+    const [enteredSurname, setEnteredSurname] = useState(props.state.surname);
+    const [enteredNationality, setEnteredNationality] = useState(props.state.nationality);
+    const [enteredNif, setEnteredId] = useState(props.state.id);
+    const [enteredAge, setEnteredAge] = useState(props.state.age);
     
     const nameChangeHandler = (event) => {
         setEnteredName(event.target.value);
@@ -53,49 +24,31 @@ const Passenger = (props) => {
         setEnteredNationality(event.target.value)
     }
     
-    const nifChangeHandler = (event) => {
-        setEnteredNif(event.target.value);
+    const idChangeHandler = (event) => {
+        setEnteredId(event.target.value);
     }
     
     const ageChangeHandler = (event) => {
         setEnteredAge(event.target.value);
     }
 
-    let passenger = {
-       
-    }
-
-
-
-    /*axios({
-        method: 'post',
-        url: '/book',
-        data: passenger
-    })
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });*/
-
     return (
             <Card className="flightBox">
                 <fieldset>
                 <legend>PERSONAL DATA</legend>
                 <label htmlFor="name">Name</label>
-                <input id="name" type="text" onChange={nameChangeHandler} />
+                <input id="name" type="text" onChange={nameChangeHandler} value={enteredName} />
                 <label htmlFor="surname">Surname</label>
-                <input id="surname" type="text" onChange={surnameChangeHandler} />
+                <input id="surname" type="text" onChange={surnameChangeHandler} value={enteredSurname} />
                 <label htmlFor="nationality">Nationality</label>
-                <input id="nationality" type="text" onChange={nationalityChangeHandler} />
+                <input id="nationality" type="text" onChange={nationalityChangeHandler} value={enteredNationality} />
                 <label htmlFor="nif">NIF/Passport</label>
-                <input type="text" onChange={nifChangeHandler} />
+                <input type="text" onChange={idChangeHandler} value={enteredNif} />
                 <label htmlFor="age">Age</label>
-                <select onChange={ageChangeHandler}>
-                    <option value="">{"<"} 2</option>
-                    <option value=""> 2 {"<>"} 9</option>
-                    <option value="">{">"} 9</option>
+                <select onChange={ageChangeHandler} value={enteredAge}>
+                    <option value="0">{"<"} 2</option>
+                    <option value="1"> 2 {"<>"} 9</option>
+                    <option value="2">{">"} 9</option>
                 </select>
                 </fieldset>
             </Card>   
