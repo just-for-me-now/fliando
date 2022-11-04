@@ -3,25 +3,28 @@ label{
     padding:15px;
 }
 
-.passengerForm{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content:flex-start ;
-    border-radius: 5px;
-}
-
-.passengerForm>*{
-    margin: 0.3rem 0.4rem;
-    border: 1px solid black;
-    box-shadow: 0 2px 5px rgb(0,0,0,0.1);
-    padding:0.6rem;
-    border-radius: 5px;
-}
-
-input{
+.passenger {
     border-radius:3px;
     font-weight: bold;
-    width: 25vw;
+}
+
+.passenger > * {
+    width: 100%;
+}
+
+.passenger > * > label {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.passenger > * > input {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.passenger > * > select {
+    width: 20%;
+    margin-left: 20%;
 }
 
 .bookButton{

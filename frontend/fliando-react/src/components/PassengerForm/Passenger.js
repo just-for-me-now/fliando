@@ -27,7 +27,7 @@ const Passenger = (props) => {
     }
 
     return (
-            <Card className="flightBox">
+            <Card className="flightBox passenger">
                 <fieldset>
                 <legend>PERSONAL DATA</legend>
                 <label htmlFor="name">Name</label>

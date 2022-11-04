@@ -27,7 +27,7 @@ public class BookService {
 		this.passengerRepo = passengerRepo;
 	}
 
-	public void checkMakeReservation(ReservationInfo reservationInfo) throws Exception {
+	public void checkAndMakeReservation(ReservationInfo reservationInfo) throws Exception {
 		
 		if(reservationInfo == null || reservationInfo.getPassengers() == null) throw new WrongPassengersException();
 		
@@ -87,6 +87,9 @@ public class BookService {
 	private void backgroundCheck(List<Passenger> passengers) throws NoFlyListException {
 		for(Passenger passenger : passengers) {
 			if(passenger.getFirstName().equals("Dick") && passenger.getLastName().equals("Rojas")) throw new NoFlyListException();
+			if(passenger.getFirstName().equals("Juan") && passenger.getLastName().equals("Villar")) throw new NoFlyListException();
+			if(passenger.getFirstName().equals("Guillermo") && passenger.getLastName().equals("Cayetano")) throw new NoFlyListException();
+			if(passenger.getFirstName().equals("Giorgios") && passenger.getLastName().equals("Kapsalakos")) throw new NoFlyListException();
 		}
 	}
 

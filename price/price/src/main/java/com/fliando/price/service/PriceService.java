@@ -62,7 +62,7 @@ public class PriceService {
 		if (toddlers + children + adults > 300) {
 			throw new TooManyReservationsException();
 		}
-		if (adults < 0) {
+		if (adults <= 0) {
 			throw new NotEvenAnAdultException();
 		}
 

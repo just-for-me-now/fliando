@@ -26,7 +26,7 @@ public class Controller {
 	
 	@PostMapping(path="/book")
 	public ResponseEntity<Object> bookFlight(@RequestBody ReservationInfo reservationInfo) throws Exception {
-		service.checkMakeReservation(reservationInfo);
+		service.checkAndMakeReservation(reservationInfo);
 		
 		
 		return ResponseEntity.status(HttpStatus.CREATED).build();

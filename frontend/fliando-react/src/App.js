@@ -60,6 +60,14 @@ function App() {
             price: 0,
         };
 
+        let toddlers = 0;
+        let children = 0;
+        let adults = 1;
+        let luggage = 0;
+        let roundTrip = false;
+
+        let priceAddress = `http://localhost:8082/price?flightId=${body.flightId}&toddlers=${toddlers}&children=${children}&adults=${adults}&luggage=${luggage}&roundTrip=${roundTrip}`
+        axios.get(priceAddress).then(response => {body.price = response.data; console.log(body); return body.price;}).then(
         axios.post(
             "http://localhost:8086/book",body, {
                 headers: {
@@ -67,8 +75,9 @@ function App() {
                 }
             }
         ).then(
-            () => setAdmin(3)
-        )
+            () => setAdmin(3),
+            () => setAdmin(4)
+        ));
     }
     
     const sendToLogin = () =>{
@@ -94,6 +103,7 @@ function App() {
         </div>
     )
     if(admin === 3) return <div><h1>Congratulations on finishing this app!</h1></div>
+    if(admin === 4) return <div><h1>Congratulations on finishing this app with a wrong request!</h1></div>
 
 	return (
 		<div className="App">
@@ -111,7 +121,7 @@ function App() {
                         : <div />
             }
             { flightData ?  <PassengerContainer handlePassengerInput={handlePassengerInput} handleNewPassenger={handleNewPassenger} data={passengerData} /> : <div /> }
-             <Button className="bookButton" onClick={sendBooking} >BOOK</Button>
+            { passengerData.length > 0 ? <Button className="bookButton" onClick={sendBooking} >BOOK</Button> : <div /> }
 
 		</div>
 	);
