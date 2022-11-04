@@ -9,7 +9,8 @@ const AdminStats = () =>{
     const { data } = useFetch(address);
 
     return (
-        <div>
+        <div className="adminStatsContainer">
+            <h2 className="adminInfoTitle">Admin Info</h2>
             {data?.map(elem=><Counter name={elem.name} counter={elem.counter}></Counter>)}
         </div>
         

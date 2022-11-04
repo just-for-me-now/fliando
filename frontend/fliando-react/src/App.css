@@ -41,3 +41,27 @@ body{
   border-radius:5px;
   padding: 1.2rem 0.4rem;
 }
+.adminStatsContainer{
+  background-color: rgb(245, 233, 233, 0.83);
+  border-radius:5px;
+  padding: 1.6rem 1rem;
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 2px 5px rgb(0, 0, 0, .25);
+  margin: 1rem 0 0 0;
+}
+.nameProp{
+  margin-top: 0.7rem;
+  font-size: 1.2rem;
+}
+.counterProp{
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+.adminInfoTitle{
+  color:#2C3FEA;
+  font-size: 2rem;
+  font-family: 'Libre Baskerville', serif;
+}
