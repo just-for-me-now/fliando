@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fliando.log.model.Counter;
 import com.fliando.log.model.Log;
 import com.fliando.log.service.LogService;
 
@@ -35,6 +36,12 @@ public class Controller {
 	@GetMapping(path ="/logs")
 	public List<Log> retreiveAllData() {
 		return service.findAllLogs();
+	}
+	
+	@GetMapping(path="/counts")
+	public List<Counter> getAllCounters(){
+		return service.findAllCounters();
+		
 	}
 	
 	@PatchMapping(path="/counts/{id}")
