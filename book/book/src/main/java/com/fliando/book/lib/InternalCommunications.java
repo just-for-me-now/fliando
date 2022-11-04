@@ -65,4 +65,36 @@ public class InternalCommunications {
 			throw new WrongPriceOrUnreachablePriceServiceException();
 		}
 	}
+
+	public static void logAddBooking() {
+		String address = "http://localhost:8085/counts/bookings";
+		
+		
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
+		
+		try {
+			client.send(request, BodyHandlers.ofString()).body();
+		} catch (Exception e) {
+		
+			/*Log service is not connecting*/
+		}
+		
+	}
+
+	public static void logAddPassengers() {
+		String address = "http://localhost:8086/counts/passengers";
+		
+		HttpClient client = HttpClient.newHttpClient();
+		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(address)).build();
+		
+		try {
+			client.send(request, BodyHandlers.ofString()).body();
+		} catch (Exception e) {
+		
+			/*Log service is not connecting*/
+		}
+		
+		
+	}
 }

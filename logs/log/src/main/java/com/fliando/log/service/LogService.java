@@ -40,5 +40,39 @@ public class LogService {
 		
 		counters.save(counter.get());
 	}
+	
+	public void incrementOrCreate(String name) {
+		Optional<Counter> oCounter = counters.findByName(name);
+		Counter counter = null;
+		if(oCounter.isEmpty()) {
+			counter = counters.save(new Counter(name, 0));
+		} else {
+			counter = oCounter.get();
+		}
+		
+		counter.setCounter(counter.getCounter() + 1);
+		
+		counters.save(counter);
+	}
+	
+	
+	public void incrementPassengers(int toddlers, int children, int adults) {
+		
+		int todCount = counters.findById("toddlers").get().getCounter();
+		todCount += toddlers;
+		
+		counters.save(new Counter("toddlers", todCount));
+		
+		int childCount = counters.findById("children").get().getCounter();
+		childCount += children;
+		
+		counters.save(new Counter("children", childCount));
+		
+		int adultCount = counters.findById("adults").get().getCounter();
+		adultCount += adults;
+		
+		counters.save(new Counter("adults", adultCount));
+		
+	}
 
 }

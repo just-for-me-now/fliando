@@ -25,6 +25,16 @@ public class Prepopulator implements CommandLineRunner {
 		
 		counters.save(new Counter("visits", 0));
 		
+		counters.save(new Counter("bookings", 0));
+		
+		counters.save(new Counter("views", 0));
+		
+		counters.save(new Counter("all_views", 0));
+		
+		
+		
+		
+		
 	}
 
 }

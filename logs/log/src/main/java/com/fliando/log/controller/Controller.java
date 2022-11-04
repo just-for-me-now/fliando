@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,4 +43,31 @@ public class Controller {
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
+	
+
+	
+	@PutMapping(path="/counts/origins/{id}")
+	public ResponseEntity<Object> incrementOrCreateOrigin(@PathVariable String name) {
+		service.incrementOrCreate("origins_" + name);
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
+	}
+	
+	@PutMapping(path="/counts/destinations/{id}")
+	public ResponseEntity<Object> incrementOrCreateDestination(@PathVariable String name) {
+		service.incrementOrCreate("destinations_" + name);
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
+	}
+	
+	@PutMapping(path="/counts/passengers/toddlers/{toddler}/children/{child}/adults/{adult}")
+	public ResponseEntity<Object> incrementPassenger(@PathVariable int toddler, @PathVariable int child, @PathVariable int adult) {
+		service.incrementPassengers(toddler,child,adult);
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
+		}
+	
+	
+	
+	
 }

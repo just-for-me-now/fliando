@@ -41,6 +41,8 @@ public class BookService {
 		
 		checkWithThePriceServiceIfThePriceIsCorrect(reservationInfo);
 		
+		InternalCommunications.logAddBooking();
+		
 		savePassengerInfo(reservationInfo);
 		
 		infoRepo.save(reservationInfo);
