@@ -7,13 +7,13 @@ import './FlightContainer.css';
 const FlightContainer = props => {
 
     const address = `http://localhost:8084/origins/${props.origin}/destinations/${props.destination}/dates/${props.date}`;
-    console.log(address)
     const { data } = useFetch(address);
     const [filteredFlights, setFilteredFlights] = useState(null);
     const [selected, setSelected] = useState(null)
     const [filters, setFilters] = useState({})
 
     const handleSelect = key => {
+        props.handleSaveFlightData(key)
         setSelected(key);
         applyFilters(key, filters);
     }
