@@ -13,11 +13,12 @@ import com.fliando.log.repo.ILogsRepository;
 @Service
 public class LogService {
 	
-	private static ILogsRepository repo;
-	private static ICountersRepository counters;
+	private ILogsRepository repo;
+	private ICountersRepository counters;
 	
-	public LogService(ILogsRepository repo) {
+	public LogService(ILogsRepository repo, ICountersRepository counters) {
 		this.repo = repo;
+		this.counters = counters;
 	}
 	
 	public void saveLog(String message) {
@@ -30,6 +31,11 @@ public class LogService {
 		repo.save(new Log("Log - Logs were requested"));
 		
 		return (List<Log>) repo.findAll();
+	}
+	
+public List<Counter> findAllCounters() {
+		repo.save(new Log("Log - Counters were requested"));
+		return (List<Counter>) counters.findAll();
 	}
 
 	public void increment(String name) throws CounterNotFoundException {
@@ -74,5 +80,7 @@ public class LogService {
 		counters.save(new Counter("adults", adultCount));
 		
 	}
+
+	
 
 }
