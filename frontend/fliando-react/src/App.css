@@ -26,3 +26,9 @@ body{
 .App{
   padding: 1rem 1.6rem;
 }
+.adminButton{
+  position: absolute;
+  top:0;
+  right:0;
+  border:none;
+}

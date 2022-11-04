@@ -1,17 +1,21 @@
 import "./App.css";
+import { useState } from "react";
 import Header from "./components/Header/Header.js";
 import FormSearch from "./components/Form/FormSearch";
 import FlightContainer from "./components/Flights/FlightContainer";
 import Passenger from "./components/PassengerForm/Passenger.js";
 import PassengerContainer from "./components/PassengerForm/PassengerContainer.js";
 import Button from "./components/UI/Button/Button";
-import { useState } from "react";
+import AdminLogin from "./components/Admin/AdminLogin";
+import AdminStats from "./components/Admin/AdminStats";
+import AdminButton from "./components/Admin/AdminButton";
 
 
 function App() {
 
 	const [searchData, setSearchData] = useState(null);
     const [flightData, setFlightData] = useState(null);
+    const [admin, setAdmin] = useState(0)
 
     const search = (origin, originName, destination, destinationName, date) => {
         setSearchData({ origin, originName, destination, destinationName, date });
@@ -20,13 +24,35 @@ function App() {
     const handleSaveFlightData = data => {
         setFlightData(data);
     }
+    
+    const sendToLogin = () =>{
+        setAdmin(1);
+    }
+    const sendToMain = () =>{
+        setAdmin(0);
+    }
+    const sendToStats = () =>{
+        setAdmin(2);
+    }
+
+    if(admin ===1) return (
+        <div className="App">
+            <AdminLogin  action={sendToStats}/>
+            <AdminButton action={sendToMain} text={"Main"}/>
+        </div>
+    )
+    if (admin ===2) return(
+        <div>
+            <AdminStats/>
+            <AdminButton action={sendToMain} text={"Main"}/>
+        </div>
+    )
 
 	return (
 		<div className="App">
 			<Header />
 			<h2 className="titleh2">Where are you flying to?</h2>
-
-			
+            <AdminButton action={sendToLogin} text={"Admin Login"}/>
 			<FormSearch search={search} />
 			{searchData ? <FlightContainer 
                             origin={searchData.origin} 
