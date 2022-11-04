@@ -44,7 +44,7 @@ public class Controller {
 		
 	}
 	
-	@PatchMapping(path="/counts/{id}")
+	@PatchMapping(path="/counts/{name}")
 	public ResponseEntity<Object> incrementCounter(@PathVariable String name) throws CounterNotFoundException {
 		service.increment(name);
 		
@@ -53,14 +53,14 @@ public class Controller {
 	
 
 	
-	@PutMapping(path="/counts/origins/{id}")
+	@PutMapping(path="/counts/origins/{name}")
 	public ResponseEntity<Object> incrementOrCreateOrigin(@PathVariable String name) {
 		service.incrementOrCreate("origins_" + name);
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
-	@PutMapping(path="/counts/destinations/{id}")
+	@PutMapping(path="/counts/destinations/{name}")
 	public ResponseEntity<Object> incrementOrCreateDestination(@PathVariable String name) {
 		service.incrementOrCreate("destinations_" + name);
 		
